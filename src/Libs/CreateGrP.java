@@ -7,7 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * @author HoaiphuLam
+ * @author 
  *
  */
 public class CreateGrP {
