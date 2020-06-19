@@ -88,21 +88,22 @@ public class Main extends JFrame {
 	private void pnlGridmouseMoved(MouseEvent e) {
 		mx = e.getX();
 		my = e.getY();
-		
+		int x = (int) (mx / size * 0.2);
+		int y = (int) (my / size * 0.2);
 		Point M = new Point();
 		M.x = (int) (O.x * 0.2);
 		M.y = (int) (O.y * 0.2);
 		if(mx / size <= O.x && my / size <= O.y) {
-			lblToado.setText("x: " + (float)((mx / size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / size) * 0.2));
+			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
 		}
 		else if(mx / size > O.x && my / size <= O.y) {
-			lblToado.setText("x: " + (float)((mx / size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / size) * 0.2));
+			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
 		}
 		else if(mx / size <= O.x && my / size > O.y) {
-			lblToado.setText("x: " + (float)((mx / size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / size) * 0.2));
+			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
 		}
 		else if(mx / size > O.x && my / size > O.y) {
-			lblToado.setText("x: " + (float)((mx / size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / size) * 0.2));
+			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
 		}
 	}
 	
