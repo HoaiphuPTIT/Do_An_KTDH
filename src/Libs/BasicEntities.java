@@ -6,19 +6,18 @@ package Libs;
  * @author HoaiphuLam
  *
  */
-public class BasicEntities {
+public class BasicEntities extends CreateGrP{
 	
-	private CreateGrP lib;
 	public BasicEntities(int maxX, int maxY) {
-		super();
-		lib = new CreateGrP(maxX, maxY);
+		super(maxX, maxY);
+		// TODO Auto-generated constructor stub
 	}
 
 	public void put4Pixel(int xc, int yc, int r1, int r2) {
-		lib.putPixel(xc+r1, yc+r2);
-		lib.putPixel(xc-r1, yc+r2);
-		lib.putPixel(xc+r1, yc-r2);
-		lib.putPixel(xc-r1, yc-r2);
+		super.putPixel(xc+r1, yc+r2);
+		super.putPixel(xc-r1, yc+r2);
+		super.putPixel(xc+r1, yc-r2);
+		super.putPixel(xc-r1, yc-r2);
  	}
  	
  	public void midPointEclip(int xc, int yc, int A, int B) {
@@ -48,11 +47,11 @@ public class BasicEntities {
  	            fy -= 2*a2;
  	        }
  	        if(t % 9 < 5) {
- 	        	lib.putPixel(xc+x, yc-y);
- 	        	lib.putPixel(xc-x, yc-y);
+ 	        	super.putPixel(xc+x, yc-y);
+ 	        	super.putPixel(xc-x, yc-y);
  	        }
- 	        lib.putPixel(xc+x, yc+y);
- 	        lib.putPixel(xc-x, yc+y);
+ 	        super.putPixel(xc+x, yc+y);
+ 	        super.putPixel(xc-x, yc+y);
  	    }
  	    p = (int) Math.round(b2*(x +0.5)*(x +0.5) + a2*(y-1)*(y-1) - a2*b2);
  	    
@@ -72,11 +71,11 @@ public class BasicEntities {
  	            p += b2*(2*x +2) +a2*(3- 2*y); //p=p+ b2(2x +2) + a2(3-2y)
  	        }
  	        if(t % 9 < 5) {
- 	        	lib.putPixel(xc+x, yc-y);
- 	        	lib.putPixel(xc-x, yc-y);
+ 	        	super.putPixel(xc+x, yc-y);
+ 	        	super.putPixel(xc-x, yc-y);
 	        }
- 	        lib.putPixel(xc+x, yc+y);
- 	       	lib.putPixel(xc-x, yc+y);
+ 	        super.putPixel(xc+x, yc+y);
+ 	        super.putPixel(xc-x, yc+y);
  	    }
  	}
 }

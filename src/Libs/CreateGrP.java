@@ -17,8 +17,8 @@ public class CreateGrP {
 	
 	public CreateGrP(int maxX, int maxY) {
 		super();
-		size = 6;
-		maTranPixel = new boolean[maxX + 1][maxY + 1];
+		this.size = 6;
+		this.maTranPixel = new boolean[maxX + 1][maxY + 1];
 	}
 
 	// phuong thuc nay de ve grid 
