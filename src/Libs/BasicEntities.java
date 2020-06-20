@@ -21,6 +21,7 @@ public class BasicEntities extends CreateGrP{
  	}
  	
  	public void midPointEclip(int xc, int yc, int A, int B) {
+ 		System.out.println("Ve elcip ne");
  		int x, y, fx, fy, a2, b2, p;
  	    x = 0;
  	    y = B;
