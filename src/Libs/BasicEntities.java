@@ -2,6 +2,9 @@
  * 
  */
 package Libs;
+
+import java.awt.Graphics;
+
 /**
  * @author HoaiphuLam
  *
@@ -12,7 +15,7 @@ public class BasicEntities extends CreateGrP{
 		super(maxX, maxY);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public void put4Pixel(int xc, int yc, int r1, int r2) {
 		super.putPixel(xc+r1, yc+r2);
 		super.putPixel(xc-r1, yc+r2);
@@ -21,7 +24,7 @@ public class BasicEntities extends CreateGrP{
  	}
  	
  	public void midPointEclip(int xc, int yc, int A, int B) {
- 		System.out.println("Ve elcip ne");
+ 		
  		int x, y, fx, fy, a2, b2, p;
  	    x = 0;
  	    y = B;

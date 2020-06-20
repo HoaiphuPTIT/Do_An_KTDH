@@ -61,7 +61,7 @@ public class Main extends JFrame {
 		pnlGrid = new JPanel() {
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
-				lib.drawPixel(g, pnlGrid.getWidth(), pnlGrid.getHeight());
+				be.drawPixel(g, pnlGrid.getWidth(), pnlGrid.getHeight());
 			}
 		};
 		pnlGrid.addMouseListener(new MouseAdapter() {
@@ -109,8 +109,8 @@ public class Main extends JFrame {
 	
 	
 	private void pnlGridmouseClicked(MouseEvent e) {
-		lib.putPixel(mx / size, my / size);
-		be = new BasicEntities(maxX, maxY);
+		be.putPixel(mx / size, my / size);
+		
 		be.midPointEclip(O.x, O.y, 5, 5);
 		pnlGrid.repaint();
 	}
@@ -126,7 +126,7 @@ public class Main extends JFrame {
         //System.out.println(pnlGrid.getWidth() + " -> " + maxX + " / 2 -> " + maxX / 2);
         //System.out.println(pnlGrid.getHeight() + " -> " + maxY + " / 2 -> " + maxY / 2);
         
-        lib = new CreateGrP(maxX, maxY);
+        be = new BasicEntities(maxX, maxY);
         O = new Point();
         O.x = maxX / 2 + 1; // 140 
 		O.y = maxY / 2 - 1; // 71
