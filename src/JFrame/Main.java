@@ -122,7 +122,7 @@ public class Main extends JFrame {
 	
 	private void pnlGridmouseClicked(MouseEvent e) {
 		be.putPixel(mx / size, my / size);
-		be.midPointEclip(O.x, O.y, 5, 5);
+		be.hcnDDA(15, 55, 43, 23);
 		pnlGrid.repaint();
 	}
 	
