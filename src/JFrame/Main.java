@@ -130,6 +130,7 @@ public class Main extends JFrame {
         O = new Point();
         O.x = maxX / 2 + 1; // 140 
 		O.y = maxY / 2 - 1; // 71
+		
 	}
 
 }
