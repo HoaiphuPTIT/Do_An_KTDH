@@ -92,6 +92,7 @@ public class CreateGrP {
 			}
 			for(int i = x1; i <= x2; i++){
 				putPixel(i, y, c);
+				
 			}
 			while(maTranMau[x1][y + 1] == Color.BLACK.getRGB()) {
 				x1++;

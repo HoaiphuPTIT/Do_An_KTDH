@@ -135,14 +135,12 @@ public class Main extends JFrame {
 	
 	
 	private void pnlGridmouseClicked(MouseEvent e) {
-		be.hcnDDA(15, 23, 43, 55);
-		Point maxA, maxB;
-		maxA = new Point(15, 23);
-		maxB = new Point(43, 55);
-		be.toMauBien(19, 24, Color.RED);
-		be.midPointEclip(O.x, O.y, 14, 35);
-		be.toMauBien(19, 24, Color.RED);
-		be.toMauBien(O.x, O.y, Color.RED);
+		
+		Point dinh, trai, phai;
+		dinh = new Point(O.x, O.y - 45);
+		trai = new Point(O.x - 15, O.y - 15);
+		phai = new Point(O.x + 15, O.y - 15);
+		be.ve2D1(O, dinh, trai, phai);
 		pnlGrid.repaint();
 	}
 	

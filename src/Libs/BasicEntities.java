@@ -304,4 +304,28 @@ public class BasicEntities extends CreateGrP{
  		dtDDA(x2, y2, x, y);
  		dtDDA(x, y, x1, y1);
  	}
+ 	
+ 	// 
+ 	public void ve2D1(Point tam, Point dinh, Point trai, Point phai) {
+ 		midPointDTron(tam.x, tam.y, 10);
+ 		
+ 		Point A, B;
+ 		A = new Point(trai.x, trai.y + 30);
+ 		B = new Point(phai.x, phai.y + 30);
+ 		
+ 		dtDDA(dinh.x, dinh.y, trai.x, trai.y);
+ 		dtDDA(dinh.x, dinh.y, phai.x, phai.y);
+ 		
+ 		
+ 		hcnDDA(trai.x, trai.y, B.x, B.y);
+ 		
+ 		
+ 		Point C, D;
+ 		C = new Point(A.x + 5, A.y);
+ 		D = new Point(B.x - 5, B.y + 35);
+ 		hcnDDA(C.x, C.y, D.x, D.y);
+ 		super.toMauBien(tam.x, tam.y + 12, Color.BLUE);
+ 		super.toMauBien(tam.x, tam.y - 12, Color.BLUE);
+ 		super.toMauBien(C.x + 5, C.y + 5, Color.CYAN);
+ 	}
 }
