@@ -2,6 +2,8 @@ package JFrame;
 import Libs.BasicEntities;
 import Libs.CreateGrP;
 import Libs.Point;
+
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
@@ -100,29 +102,47 @@ public class Main extends JFrame {
 	private void pnlGridmouseMoved(MouseEvent e) {
 		mx = e.getX();
 		my = e.getY();
-		int x = (int) (mx / size * 0.2);
-		int y = (int) (my / size * 0.2);
+		float x = (int) (mx / size * 0.2);
+		float y = (int) (my / size * 0.2);
 		Point M = new Point();
 		M.x = (int) (O.x * 0.2);
 		M.y = (int) (O.y * 0.2);
+//		if(mx / size <= O.x && my / size <= O.y) {
+//			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
+//		}
+//		else if(mx / size > O.x && my / size <= O.y) {
+//			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
+//		}
+//		else if(mx / size <= O.x && my / size > O.y) {
+//			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
+//		}
+//		else if(mx / size > O.x && my / size > O.y) {
+//			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
+//		}
 		if(mx / size <= O.x && my / size <= O.y) {
-			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
+			lblToado.setText("x: " + (float)((mx / size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / size) * 0.2));
 		}
 		else if(mx / size > O.x && my / size <= O.y) {
-			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
+			lblToado.setText("x: " + (float)((mx / size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / size) * 0.2));
 		}
 		else if(mx / size <= O.x && my / size > O.y) {
-			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
+			lblToado.setText("x: " + (float)((mx / size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / size) * 0.2));
 		}
 		else if(mx / size > O.x && my / size > O.y) {
-			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
+			lblToado.setText("x: " + (float)((mx / size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / size) * 0.2));
 		}
 	}
 	
 	
 	private void pnlGridmouseClicked(MouseEvent e) {
-		be.putPixel(mx / size, my / size);
-		be.hcnDDA(15, 55, 43, 23);
+		be.hcnDDA(15, 23, 43, 55);
+		Point maxA, maxB;
+		maxA = new Point(15, 23);
+		maxB = new Point(43, 55);
+		be.toMauBien(19, 24, Color.RED);
+		be.midPointEclip(O.x, O.y, 14, 35);
+		be.toMauBien(19, 24, Color.RED);
+		be.toMauBien(O.x, O.y, Color.RED);
 		pnlGrid.repaint();
 	}
 	
@@ -138,6 +158,7 @@ public class Main extends JFrame {
         //System.out.println(pnlGrid.getHeight() + " -> " + maxY + " / 2 -> " + maxY / 2);
         
         be = new BasicEntities(maxX, maxY);
+        be.setMaTranPixel(maxX, maxY);
         O = new Point();
         O.x = maxX / 2 + 1; // 140 
 		O.y = maxY / 2 - 1; // 71

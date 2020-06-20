@@ -3,6 +3,7 @@
  */
 package Libs;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JOptionPane;
@@ -20,10 +21,10 @@ public class BasicEntities extends CreateGrP{
 	
 	// vẽ eclipse
 	public void put4Pixel(int xc, int yc, int r1, int r2) {
-		super.putPixel(xc+r1, yc+r2);
-		super.putPixel(xc-r1, yc+r2);
-		super.putPixel(xc+r1, yc-r2);
-		super.putPixel(xc-r1, yc-r2);
+		super.putPixel(xc+r1, yc+r2, Color.BLACK);
+		super.putPixel(xc-r1, yc+r2, Color.BLACK);
+		super.putPixel(xc+r1, yc-r2, Color.BLACK);
+		super.putPixel(xc-r1, yc-r2, Color.BLACK);
  	}
  	
  	public void midPointEclip(int xc, int yc, int A, int B) {
@@ -57,10 +58,10 @@ public class BasicEntities extends CreateGrP{
 // 	        	super.putPixel(xc+x, yc-y);
 // 	        	super.putPixel(xc-x, yc-y);
 // 	        }
- 	        super.putPixel(xc+x, yc-y);
-        	super.putPixel(xc-x, yc-y);
- 	        super.putPixel(xc+x, yc+y);
- 	        super.putPixel(xc-x, yc+y);
+ 	        super.putPixel(xc+x, yc-y, Color.BLACK);
+        	super.putPixel(xc-x, yc-y, Color.BLACK);
+ 	        super.putPixel(xc+x, yc+y, Color.BLACK);
+ 	        super.putPixel(xc-x, yc+y, Color.BLACK);
  	    }
  	    p = (int) Math.round(b2*(x +0.5)*(x +0.5) + a2*(y-1)*(y-1) - a2*b2);
  	    
@@ -83,24 +84,24 @@ public class BasicEntities extends CreateGrP{
 // 	        	super.putPixel(xc+x, yc-y);
 // 	        	super.putPixel(xc-x, yc-y);
 //	        }
- 	        super.putPixel(xc+x, yc-y);
-        	super.putPixel(xc-x, yc-y);
- 	        super.putPixel(xc+x, yc+y);
- 	        super.putPixel(xc-x, yc+y);
+ 	        super.putPixel(xc+x, yc-y, Color.BLACK);
+        	super.putPixel(xc-x, yc-y, Color.BLACK);
+ 	        super.putPixel(xc+x, yc+y, Color.BLACK);
+ 	        super.putPixel(xc-x, yc+y, Color.BLACK);
  	    }
  	}
  	
  	
  	// vẽ đường tròn
  	public void put8Pixel(int xc, int yc, int x, int y) {
- 		super.putPixel(x + xc, y + yc);
- 		super.putPixel(-x + xc, y + yc);
- 		super.putPixel(x + xc, -y + yc);
- 		super.putPixel(-x + xc, -y + yc);
- 		super.putPixel( y + xc, x + yc);
- 		super.putPixel(-y + xc, x + yc);
- 		super.putPixel(y + xc, -x + yc);
- 		super.putPixel(-y + xc, -x + yc);
+ 		super.putPixel(x + xc, y + yc, Color.BLACK);
+ 		super.putPixel(-x + xc, y + yc, Color.BLACK);
+ 		super.putPixel(x + xc, -y + yc, Color.BLACK);
+ 		super.putPixel(-x + xc, -y + yc, Color.BLACK);
+ 		super.putPixel( y + xc, x + yc, Color.BLACK);
+ 		super.putPixel(-y + xc, x + yc, Color.BLACK);
+ 		super.putPixel(y + xc, -x + yc, Color.BLACK);
+ 		super.putPixel(-y + xc, -x + yc, Color.BLACK);
  	}
  	
  	public void midPointDTron(int xc, int yc, int r) {
@@ -159,7 +160,7 @@ public class BasicEntities extends CreateGrP{
         
         float x = x1, y = y1;
         
-        super.putPixel(x1, y1);
+        super.putPixel(x1, y1, Color.BLACK);
         
         int k = 0;
         while(k < steps){
@@ -167,7 +168,7 @@ public class BasicEntities extends CreateGrP{
             x += xInc;
             y += yInc;
             
-            super.putPixel(Math.round(x), Math.round(y));
+            super.putPixel(Math.round(x), Math.round(y), Color.BLACK);
         }
     }
  	
@@ -179,7 +180,7 @@ public class BasicEntities extends CreateGrP{
         
         float x = x1, y = y1;
         
-        super.putPixel(x1, y1);
+        super.putPixel(x1, y1, Color.BLACK);
         
         int k = 0, j = 0, h = 0; // j là đoạn không vẽ, h là khoảng trống giữa các đoạn đã vẽ
         while(k < steps){
@@ -191,7 +192,7 @@ public class BasicEntities extends CreateGrP{
 //            }
 //            super.putPixel(Math.round(x), Math.round(y));
             if(j != 4) {
-            	super.putPixel(Math.round(x), Math.round(y));
+            	super.putPixel(Math.round(x), Math.round(y), Color.BLACK);
             }
             else if(j == 4) { // tới đoạn không cần vẽ
             	//maTranPixel[Math.round(x)][Math.round(y)] = false;
@@ -212,7 +213,7 @@ public class BasicEntities extends CreateGrP{
         
         float x = x1, y = y1;
         
-        super.putPixel(x1, y1);
+        super.putPixel(x1, y1, Color.BLACK);
         
         int k = 0, j = 0, h = 0; // j là đoạn không vẽ, h là khoảng cách giữa các đoạn đã vẽ
         while(k < steps){
@@ -220,7 +221,7 @@ public class BasicEntities extends CreateGrP{
             x += xInc;
             y += yInc;
             if(j != 4) {
-            	super.putPixel(Math.round(x), Math.round(y));
+            	super.putPixel(Math.round(x), Math.round(y), Color.BLACK);
             }
             else if(j == 4) {
             	//maTranPixel[Math.round(x)][Math.round(y)] = false;
@@ -230,11 +231,11 @@ public class BasicEntities extends CreateGrP{
             		h = 0;
             	}
             	if(h == 3) {
-            		super.putPixel(Math.round(x), Math.round(y));
+            		super.putPixel(Math.round(x), Math.round(y), Color.BLACK);
             	}
             }
         }
-        super.putPixel(x2, y2);
+        super.putPixel(x2, y2, Color.BLACK);
  	}
  	
  	public void net2ChamGach(int x1, int y1, int x2, int y2) {
@@ -245,7 +246,7 @@ public class BasicEntities extends CreateGrP{
         
         float x = x1, y = y1;
         
-        super.putPixel(x1, y1);
+        super.putPixel(x1, y1, Color.BLACK);
         
         int k = 0, j = 0, h = 0; // j là đoạn không vẽ, h là khoảng cách giữa các đoạn đã vẽ
         while(k < steps){
@@ -253,7 +254,7 @@ public class BasicEntities extends CreateGrP{
             x += xInc;
             y += yInc;
             if(j != 4) {
-            	super.putPixel(Math.round(x), Math.round(y));
+            	super.putPixel(Math.round(x), Math.round(y), Color.BLACK);
             }
             else if(j == 4) {
             	//maTranPixel[Math.round(x)][Math.round(y)] = false;
@@ -263,11 +264,11 @@ public class BasicEntities extends CreateGrP{
             		h = 0;
             	}
             	if(h == 2 || h == 4) {
-            		super.putPixel(Math.round(x), Math.round(y));
+            		super.putPixel(Math.round(x), Math.round(y), Color.BLACK);
             	}
             }
         }
-        super.putPixel(x2, y2);
+        super.putPixel(x2, y2, Color.BLACK);
  	}
  	
  	
