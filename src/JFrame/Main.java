@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
 
 public class Main extends JFrame {
 
@@ -53,6 +54,7 @@ public class Main extends JFrame {
 	private void initComponent() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 25, 1720, 1020);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -83,6 +85,16 @@ public class Main extends JFrame {
 		lblToado.setBounds(12, 942, 180, 16);
 		contentPane.add(lblToado);
 		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				be.setMaTranPixel(maxX, maxY);
+				pnlGrid.repaint();
+			}
+		});
+		btnClear.setBounds(1605, 13, 97, 25);
+		contentPane.add(btnClear);
+		
 	}
 	
 	private void pnlGridmouseMoved(MouseEvent e) {
@@ -110,8 +122,7 @@ public class Main extends JFrame {
 	
 	private void pnlGridmouseClicked(MouseEvent e) {
 		be.putPixel(mx / size, my / size);
-		
-		be.midPointEclip(O.x, O.y, 5, 5);
+		be.hcnDDA(15, 55, 43, 23);
 		pnlGrid.repaint();
 	}
 	
@@ -132,5 +143,4 @@ public class Main extends JFrame {
 		O.y = maxY / 2 - 1; // 71
 		
 	}
-
 }
