@@ -33,8 +33,8 @@ public class CreateGrP {
          for(int i = 0; i < w / size; i++){	// moi o pixel cach nhau = size
              for(int j = 0; j < h / size; j++){
                  g.drawRect(i * size, j * size, size, size);	// ve 1 o pixel co kich thuoc = size tai toa do i, j
-                 if(maTranPixel[i][j] == true && this.maTranMau[i][j] != Color.BLACK.getRGB()){	// xac dinh diem can put
-                	 this.maTranMau[i][j] = this.color.getRGB();
+                 if(maTranPixel[i][j] == true && this.maTranMau[i][j] == this.color.getRGB()){	// xac dinh diem can put
+                	 //this.maTranMau[i][j] = this.color.getRGB();
                 	 g.setColor(this.color);
                      g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
                      g.setColor(Color.LIGHT_GRAY);
@@ -46,7 +46,7 @@ public class CreateGrP {
          for(int i = 0; i < w / size; i++){	// moi o pixel cach nhau = size
              for(int j = 0; j < h / size; j++){
                  if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.BLACK.getRGB()){	// xac dinh diem can put
-                	 this.maTranMau[i][j] = this.color.getRGB();
+                	 //this.maTranMau[i][j] = this.color.getRGB();
                 	 g.setColor(Color.BLACK);
                      g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
                      g.setColor(Color.LIGHT_GRAY);
@@ -55,13 +55,18 @@ public class CreateGrP {
          }
          g.setColor(Color.RED);
          g.drawLine(w / 2 + 1, 0, w / 2 + 1, h);
-         g.drawLine(0, h / 2 - 1, w, h / 2 - 1);
+         g.drawLine(0, h / 2 - 7, w, h / 2 - 7);
  	}
  	
  	public void putPixel(int x, int y, Color c) {
  		this.maTranPixel[x][y] = true;
  		this.maTranMau[x][y] = c.getRGB();
  		this.color = c;
+ 	}
+ 	public void reputPixel(int x, int y) {
+ 		this.maTranPixel[x][y] = false;
+ 		this.maTranMau[x][y] = Color.BLACK.getRGB();
+ 		this.color = Color.BLACK;
  	}
  	
  	public void setMaTranPixel(int maxX, int maxY) {

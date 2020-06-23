@@ -2,9 +2,11 @@ package JFrame;
 import Libs.BasicEntities;
 import Libs.CreateGrP;
 import Libs.Point;
+import Libs.Transformations;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -18,12 +20,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Main extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel pnlGrid;
 	private JLabel lblToado;
+	private JComboBox cmb2D;
 	
 	private int maxX; // do dai grid
 	private int maxY; // do rong grid
@@ -97,9 +102,43 @@ public class Main extends JFrame {
 		btnClear.setBounds(1605, 13, 97, 25);
 		contentPane.add(btnClear);
 		
+		JLabel lblNewLabel = new JLabel("Vẽ 2D");
+		lblNewLabel.setBounds(12, 17, 56, 16);
+		contentPane.add(lblNewLabel);
+		
+		
+		
+		
+		DefaultComboBoxModel<String> type = new DefaultComboBoxModel<String>();
+		type.addElement("Hình 1");
+		type.addElement("Hình 2");
+		cmb2D = new JComboBox<String>(type);
+		cmb2D.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		cmb2D.setForeground(Color.WHITE);
+		cmb2D.setBackground(Color.DARK_GRAY);
+		cmb2D.setSelectedIndex(0);
+		
+		cmb2D.setBounds(80, 14, 120, 22);
+		contentPane.add(cmb2D);
+		
+		
+		JButton btnDraw = new JButton("Vẽ");
+		btnDraw.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					try {
+						btnDrawactionPerformed(e);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}
+		});
+		btnDraw.setBounds(1496, 13, 97, 25);
+		contentPane.add(btnDraw);
+		
 	}
 	
-	private void pnlGridmouseMoved(MouseEvent e) {
+	protected void pnlGridmouseMoved(MouseEvent e) {
 		mx = e.getX();
 		my = e.getY();
 		float x = (int) (mx / size * 0.2);
@@ -134,14 +173,39 @@ public class Main extends JFrame {
 	}
 	
 	
-	private void pnlGridmouseClicked(MouseEvent e) {
+	protected void pnlGridmouseClicked(MouseEvent e) {
 		
-		Point dinh, trai, phai;
-		dinh = new Point(O.x, O.y - 45);
-		trai = new Point(O.x - 15, O.y - 15);
-		phai = new Point(O.x + 15, O.y - 15);
-		be.ve2D1(O, dinh, trai, phai);
-		pnlGrid.repaint();
+	}
+	
+	protected void btnDrawactionPerformed(ActionEvent e) throws InterruptedException{
+		if(cmb2D.getSelectedIndex() == 0) {
+//			Point dinh, trai, phai;
+//			int a = 65, b = 25;
+//			dinh = new Point(O.x, O.y - a);
+//			trai = new Point(O.x - b, O.y - b);
+//			phai = new Point(O.x + b, O.y - b);
+//			be.ve2D1(O, dinh, trai, phai, a, b);
+			
+			Point A, B;
+			A = new Point(30, 30);
+			B = new Point(60, 60);
+			be.dtDDA(A.x, A.y, B.x, B.y);
+			Point tr = new Point(0, 0);
+			Transformations tf = new Transformations();
+			Point k = new Point();
+			while(tr.x <= 10) {
+ 				k = tf.tinhTien(A, tr);
+ 				be.dtDDA(A.x, A.y, k.x, k.y);
+ 				k = tf.tinhTien(B, tr);
+ 				be.dtDDA(B.x, B.y, k.x, k.y);
+ 				
+ 				tr.x++;
+ 				pnlGrid.repaint();
+ 				Thread.sleep(1000);
+ 			}
+			pnlGrid.repaint();
+		}
+		
 	}
 	
 	public Main() {

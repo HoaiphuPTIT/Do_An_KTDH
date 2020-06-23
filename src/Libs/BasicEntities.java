@@ -5,6 +5,7 @@ package Libs;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 
@@ -306,26 +307,54 @@ public class BasicEntities extends CreateGrP{
  	}
  	
  	// 
- 	public void ve2D1(Point tam, Point dinh, Point trai, Point phai) {
- 		midPointDTron(tam.x, tam.y, 10);
+ 	public void ve2D1(Point tam, Point dinh, Point trai, Point phai, int a, int b) throws InterruptedException {
+ 		int size = 20;
+ 		// ve duong tron
+ 		midPointDTron(tam.x, tam.y, size);
+ 		// ve kim dong ho
+ 		super.putPixel(tam.x,  tam.y, Color.BLACK);
+ 		dtDDA(tam.x, tam.y, tam.x - 15, tam.y - 3); // kim phut
+ 		dtDDA(tam.x, tam.y, tam.x, tam.y + 7); // kim gio
  		
  		Point A, B;
- 		A = new Point(trai.x, trai.y + 30);
- 		B = new Point(phai.x, phai.y + 30);
- 		
+ 		A = new Point(trai.x, trai.y + b*2);
+ 		B = new Point(phai.x, phai.y + b*2);
+ 		// ve tam giac tren cung
  		dtDDA(dinh.x, dinh.y, trai.x, trai.y);
  		dtDDA(dinh.x, dinh.y, phai.x, phai.y);
  		
- 		
+ 		// hcn bao quanh dong ho
  		hcnDDA(trai.x, trai.y, B.x, B.y);
- 		
- 		
- 		Point C, D;
- 		C = new Point(A.x + 5, A.y);
- 		D = new Point(B.x - 5, B.y + 35);
- 		hcnDDA(C.x, C.y, D.x, D.y);
- 		super.toMauBien(tam.x, tam.y + 12, Color.BLUE);
+ 		super.toMauBien(tam.x, tam.y + 12, Color.RED);
  		super.toMauBien(tam.x, tam.y - 12, Color.BLUE);
- 		super.toMauBien(C.x + 5, C.y + 5, Color.CYAN);
+ 		
+ 		// hcn la chan dong ho
+ 		Point C, D; // 2 diem tao duong cheo hcn
+ 		C = new Point(A.x + 10, A.y);
+ 		D = new Point(B.x - 10, B.y + 45);
+ 		hcnDDA(C.x, C.y, D.x, D.y);
+ 		
+ 		// ve con lac o duoi va dung phep tinh tien
+ 		Point diemTT, diemCodinh;
+ 		diemTT = new Point(tam.x, tam.y + 55);
+ 		diemCodinh = new Point(tam.x, tam.y + 25);
+ 		Point tr = new Point(0, 0);
+ 		Point k = new Point();
+ 		Transformations tf = new Transformations();
+ 		while(true) {
+ 			while(tr.x >= -10) {
+ 				
+ 				System.out.println(tr.x);
+ 				k = tf.tinhTien(diemTT, tr);
+ 				System.out.println("X: " + k.x + ", Y: " + k.y);
+ 				dtDDA(diemCodinh.x, diemCodinh.y, k.x, k.y);
+ 				tr.x--;
+ 				//Thread.sleep(1000);
+ 			}
+ 			break;
+ 		}
+ 		dtDDA(tam.x, tam.y + 25, tam.x - 4, tam.y + 55);
+ 		//midPointDTron(tam.x - 4, tam.y + 55, 3);
+ 		//super.toMauBien(C.x + 5, C.y + 5, Color.CYAN);
  	}
 }
