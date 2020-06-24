@@ -4,10 +4,15 @@
 package Libs;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import JFrame.Main;
 
 /**
  * @author HoaiphuLam
@@ -307,54 +312,97 @@ public class BasicEntities extends CreateGrP{
  	}
  	
  	// 
- 	public void ve2D1(Point tam, Point dinh, Point trai, Point phai, int a, int b) throws InterruptedException {
- 		int size = 20;
+ 	public void ve2D1(Point tam) throws InterruptedException {
+ 		Point left, right;
+ 		left = new Point();
+ 		right = new Point();
+ 		int khoangCach = 25, r = 20;
+ 		while(tam.x <= 250 || tam.x + khoangCach <= 279) {
+ 			super.setMaTranPixel(Param.maxX, Param.maxY);
+ 		
  		// ve duong tron
- 		midPointDTron(tam.x, tam.y, size);
+ 		midPointDTron(tam.x, tam.y, r);
+ 		
  		// ve kim dong ho
  		super.putPixel(tam.x,  tam.y, Color.BLACK);
  		dtDDA(tam.x, tam.y, tam.x - 15, tam.y - 3); // kim phut
  		dtDDA(tam.x, tam.y, tam.x, tam.y + 7); // kim gio
  		
- 		Point A, B;
- 		A = new Point(trai.x, trai.y + b*2);
- 		B = new Point(phai.x, phai.y + b*2);
+ 		left.x = tam.x - khoangCach;
+ 		left.y = tam.y - khoangCach;
+ 		right.x = tam.x + khoangCach;
+ 		right.y = tam.y - khoangCach;
+ 		
  		// ve tam giac tren cung
- 		dtDDA(dinh.x, dinh.y, trai.x, trai.y);
- 		dtDDA(dinh.x, dinh.y, phai.x, phai.y);
+ 		dtDDA(tam.x, tam.y - khoangCach*2, left.x, left.y);
+ 		dtDDA(tam.x, tam.y - khoangCach*2, right.x, right.y);
  		
  		// hcn bao quanh dong ho
- 		hcnDDA(trai.x, trai.y, B.x, B.y);
- 		super.toMauBien(tam.x, tam.y + 12, Color.RED);
- 		super.toMauBien(tam.x, tam.y - 12, Color.BLUE);
+ 		hcnDDA(left.x, left.y, right.x, right.y + khoangCach*2);
+ 		//super.toMauBien(tam.x, tam.y + 12, Color.RED);
+ 		//super.toMauBien(tam.x, tam.y - 12, Color.RED);
  		
- 		// hcn la chan dong ho
- 		Point C, D; // 2 diem tao duong cheo hcn
- 		C = new Point(A.x + 10, A.y);
- 		D = new Point(B.x - 10, B.y + 45);
- 		hcnDDA(C.x, C.y, D.x, D.y);
- 		
- 		// ve con lac o duoi va dung phep tinh tien
- 		Point diemTT, diemCodinh;
- 		diemTT = new Point(tam.x, tam.y + 55);
- 		diemCodinh = new Point(tam.x, tam.y + 25);
- 		Point tr = new Point(0, 0);
- 		Point k = new Point();
- 		Transformations tf = new Transformations();
- 		while(true) {
- 			while(tr.x >= -10) {
- 				
- 				System.out.println(tr.x);
- 				k = tf.tinhTien(diemTT, tr);
- 				System.out.println("X: " + k.x + ", Y: " + k.y);
- 				dtDDA(diemCodinh.x, diemCodinh.y, k.x, k.y);
- 				tr.x--;
- 				//Thread.sleep(1000);
- 			}
- 			break;
+ 		// hcn chan dong ho
+ 		hcnDDA(left.x + 5, left.y + khoangCach*2, right.x - 5, right.y + khoangCach*3 + 20);
+ 		//super.toMauBien(left.x + 15, left.y + khoangCach*2 + 5, Color.GREEN);
+ 		int goc = 10;
+ 		Point dauKimDH = new Point();
+ 		dauKimDH.x = tam.x;
+ 		dauKimDH.y = tam.y + 7;
+ 		tam.x += 10;
+ 		JPanel _2D1 = new JPanel() {
+				private static final long serialVersionUID = 1L;
+
+				public void paintComponent(Graphics g) {
+					super.paintComponent(g);
+					drawPixel(g, Param.pnlGrid.getWidth(), Param.pnlGrid.getHeight(), 1);
+				}
+			};
+		
+		Thread.sleep(100);
+		Param.pnlGrid.repaint();
+		
  		}
- 		dtDDA(tam.x, tam.y + 25, tam.x - 4, tam.y + 55);
- 		//midPointDTron(tam.x - 4, tam.y + 55, 3);
- 		//super.toMauBien(C.x + 5, C.y + 5, Color.CYAN);
+// 		Point tt = new Point();
+// 		Transformations tf = new Transformations();
+// 		while(goc <= 180) {
+// 			System.out.println(goc+"x: "+tt.x+", y: "+tt.y);
+// 			tt = tf.quay(dauKimDH, goc);
+// 			dtDDA(tam.x, tam.y, tt.x, tt.y); // kim gio
+// 			goc += 10;
+// 		}
+ 		
+ 	}
+ 	
+ 	public void ve2D2(Point tam) {
+ 		int r = 50, r1 = r - 43, khoangCach = 25;
+ 		Point left, right;
+ 		
+ 		left = new Point();
+ 		right = new Point();
+ 		
+ 		// ve tong the mat tron
+ 		midPointDTron(tam.x, tam.y, r);
+ 		
+ 		// ve 2 mat
+ 		// mat ben trai
+ 		left.x = tam.x - khoangCach;
+ 		left.y = tam.y - khoangCach + 5;
+ 		midPointDTron(left.x, left.y, r1);
+ 		//mat ben phai
+ 		right.x = tam.x + khoangCach;
+ 		right.y = tam.y - khoangCach + 5;
+ 		midPointDTron(right.x, right.y, r1);
+ 		
+ 		// ve mieng
+ 		int  ra = r - 20, rb = r - 40;
+ 		Point tamE = new Point();
+ 		tamE.x = tam.x;
+ 		tamE.y = tam.y + khoangCach;
+ 		midPointEclip(tamE.x, tamE.y, ra, rb);
+ 	}
+ 	
+ 	public void ve3D() {
+ 		
  	}
 }
