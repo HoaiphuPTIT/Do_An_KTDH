@@ -60,14 +60,12 @@ public class BasicEntities extends CreateGrP{
  	            p += b2*(2*x +3) + a2*(2- 2*y); //p=p +b2(2x +3) +a2(2-2y)
  	            fy -= 2*a2;
  	        }
-// 	        if(t % 9 < 5) {
-// 	        	super.putPixel(xc+x, yc-y);
-// 	        	super.putPixel(xc-x, yc-y);
-// 	        }
- 	        super.putPixel(xc+x, yc-y, Color.BLACK);
-        	super.putPixel(xc-x, yc-y, Color.BLACK);
- 	        super.putPixel(xc+x, yc+y, Color.BLACK);
- 	        super.putPixel(xc-x, yc+y, Color.BLACK);
+ 	        if(t % 9 < 5) {
+ 	        	super.putPixel(xc+x, yc-y, Color.BLACK);
+ 	        	super.putPixel(xc-x, yc-y, Color.BLACK);
+ 	        }
+ 	       super.putPixel(xc+x, yc+y, Color.BLACK);
+ 	       super.putPixel(xc-x, yc+y, Color.BLACK);
  	    }
  	    p = (int) Math.round(b2*(x +0.5)*(x +0.5) + a2*(y-1)*(y-1) - a2*b2);
  	    
@@ -86,10 +84,10 @@ public class BasicEntities extends CreateGrP{
  	            fx += 2*b2;
  	            p += b2*(2*x +2) +a2*(3- 2*y); //p=p+ b2(2x +2) + a2(3-2y)
  	        }
-// 	        if(t % 9 < 5) {
-// 	        	super.putPixel(xc+x, yc-y);
-// 	        	super.putPixel(xc-x, yc-y);
-//	        }
+ 	        if(t % 9 < 5) {
+ 	        	super.putPixel(xc+x, yc-y, Color.BLACK);
+ 	        	super.putPixel(xc-x, yc-y, Color.BLACK);
+	        }
  	        super.putPixel(xc+x, yc-y, Color.BLACK);
         	super.putPixel(xc-x, yc-y, Color.BLACK);
  	        super.putPixel(xc+x, yc+y, Color.BLACK);
@@ -312,13 +310,11 @@ public class BasicEntities extends CreateGrP{
  	}
  	
  	// 
- 	public void ve2D1(Point tam) throws InterruptedException {
+ 	public void ve2D1(Point tam){
  		Point left, right;
  		left = new Point();
  		right = new Point();
  		int khoangCach = 25, r = 20;
- 		while(tam.x <= 250 || tam.x + khoangCach <= 279) {
- 			super.setMaTranPixel(Param.maxX, Param.maxY);
  		
  		// ve duong tron
  		midPointDTron(tam.x, tam.y, r);
@@ -345,33 +341,24 @@ public class BasicEntities extends CreateGrP{
  		// hcn chan dong ho
  		hcnDDA(left.x + 5, left.y + khoangCach*2, right.x - 5, right.y + khoangCach*3 + 20);
  		//super.toMauBien(left.x + 15, left.y + khoangCach*2 + 5, Color.GREEN);
- 		int goc = 10;
- 		Point dauKimDH = new Point();
- 		dauKimDH.x = tam.x;
- 		dauKimDH.y = tam.y + 7;
- 		tam.x += 10;
- 		JPanel _2D1 = new JPanel() {
-				private static final long serialVersionUID = 1L;
-
-				public void paintComponent(Graphics g) {
-					super.paintComponent(g);
-					drawPixel(g, Param.pnlGrid.getWidth(), Param.pnlGrid.getHeight(), 1);
-				}
-			};
-		
-		Thread.sleep(100);
-		Param.pnlGrid.repaint();
-		
- 		}
-// 		Point tt = new Point();
-// 		Transformations tf = new Transformations();
-// 		while(goc <= 180) {
-// 			System.out.println(goc+"x: "+tt.x+", y: "+tt.y);
-// 			tt = tf.quay(dauKimDH, goc);
-// 			dtDDA(tam.x, tam.y, tt.x, tt.y); // kim gio
-// 			goc += 10;
-// 		}
  		
+ 		
+// 		Point tt = new Point();
+// 		tt.x = tam.x;
+// 		tt.y = tam.y;
+// 		Point tr = new Point();
+// 		tr.x = 10;
+// 		tr.y = 0;
+// 		while(tt.x <= 260) {
+// 			try {
+//				Thread.sleep(1000);
+//				super.setMaTranPixel(Param.maxX, Param.maxY);
+//				
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+// 		}
  	}
  	
  	public void ve2D2(Point tam) {
@@ -402,7 +389,56 @@ public class BasicEntities extends CreateGrP{
  		midPointEclip(tamE.x, tamE.y, ra, rb);
  	}
  	
- 	public void ve3D() {
- 		
+ 	public void hinhCau(Point tam, int r) {
+ 		int r1 = r -25;
+// 		int x1,y1,radius;
+//		x1= tam.x;
+//		y1= tam.y;
+//		radius= r;
+//		int x,y,p;
+//		x=0;
+//		y=radius;
+//		p=1-radius;
+//		
+//		
+//		
+//		while(x<y){
+//			super.putPixel(x+radius, radius-y, Color.BLACK);
+//			super.putPixel(y+radius, radius-x, Color.BLACK);
+//			super.putPixel(y+radius, radius-(-x), Color.BLACK);
+//			super.putPixel(x+radius, radius-(-y), Color.BLACK);
+//			super.putPixel(-x+radius, radius-(-y), Color.BLACK);
+//			super.putPixel(-y+radius, radius-(-x), Color.BLACK);
+//			super.putPixel(-y+radius, radius-x, Color.BLACK);
+//			super.putPixel(-x+radius, radius-y, Color.BLACK);
+//			
+//			
+//			
+//			if(p<0) p=p+(2*x+3);
+//			else{
+//				p=p+2*(x-y)+5;
+//				y--;
+//			}
+//			x++;
+//			
+//		}
+ 		midPointDTron(tam.x, tam.y, r);
+ 		midPointEclip(tam.x, tam.y, r, Math.abs(r1));
+		JPanel panelDraw = new JPanel(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void paintComponent(Graphics g) {
+				// TODO Auto-generated method stub
+				super.paintComponent(g);
+				drawPixel(g, Param.pnlGrid.getWidth(), Param.pnlGrid.getHeight(), 1);
+			}
+			
+		};
+		Param.pnlGrid.repaint();
+		
  	}
 }

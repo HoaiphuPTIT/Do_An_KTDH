@@ -31,7 +31,7 @@ import javax.swing.GroupLayout.Group;
 import javax.swing.JTabbedPane;
 import java.awt.Panel;
 
-public class Main extends JFrame {
+public class Main extends JFrame implements Runnable{
 
 	//public JPanel contentPane;
 	//public JPanel pnlGrid;
@@ -48,24 +48,54 @@ public class Main extends JFrame {
 //	private int size = 6;
 	
 	int chon = 0;
+	int hinh = 0;
     private CreateGrP lib;
 	private Point O;
 	private BasicEntities be;
 	/**
 	 * Launch the application.
 	 */
-	public static Main frame = new Main();
+	//public static Main frame = new Main();
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+		Main frame = new Main();
+		frame.setVisible(true);
+		new Thread((Runnable) frame).start();
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Main frame = new Main();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+	}
+	public void run() {
+		if(this.hinh == 0) {
+			//System.out.println("Vao 1");
+			Point tam = new Point();
+			tam = O;
+			Point tr = new Point();
+	 		tr.x = 10;
+	 		tr.y = 0;
+			Transformations tf = new Transformations();
+			be.ve2D1(tam);
+			while(tam.x <= 270) {
 				try {
-					
-					frame.setVisible(true);
-				} catch (Exception e) {
+					be.ve2D1(tam);
+					tam = tf.tinhTien(tam, tr);
+					Thread.sleep(1000);
+					be.setMaTranPixel(Param.maxX, Param.maxY);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		});
+		}
+		else {
+			System.out.println("Vao else"+hinh);
+		}
 	}
 
 	/**
@@ -149,12 +179,7 @@ public class Main extends JFrame {
 		JButton btnDraw = new JButton("Vẽ");
 		btnDraw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					try {
-						btnDrawactionPerformed(e);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					btnDrawactionPerformed(e);
 			}
 		});
 		btnDraw.setBounds(1496, 13, 97, 25);
@@ -235,23 +260,24 @@ public class Main extends JFrame {
 		
 	}
 	
-	protected void btnDrawactionPerformed(ActionEvent e) throws InterruptedException{
+	protected void btnDrawactionPerformed(ActionEvent e){
 		if(r2D.isSelected() && cmb2D.getSelectedIndex() == 0) {
 //			Point dinh, trai, phai;
 //			int a = 65, b = 25;
 //			dinh = new Point(O.x, O.y - a);
 //			trai = new Point(O.x - b, O.y - b);
 //			phai = new Point(O.x + b, O.y - b);
-			be.ve2D1(O);
 			
+			this.hinh = 1;
 		}
 		else if(r2D.isSelected() && cmb2D.getSelectedIndex() == 1) {
 			be.ve2D2(O);
 			
 			Param.pnlGrid.repaint();
 		}
-		else if(r3D.isSelected() && cmb2D.getSelectedIndex() == 1) {
-			
+		else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 0) {
+			be.hinhCau(O, 80);
+			hinh = 3;
 		}
 	}
 	
