@@ -5,6 +5,7 @@ package Libs;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -28,17 +29,40 @@ public class CreateGrP {
 	}
 
 	// phuong thuc nay de ve grid 
- 	public void drawPixel(Graphics g, int w, int h) {
+ 	public void drawPixel(Graphics g, int w, int h, int chon) {
  		g.setColor(Color.LIGHT_GRAY);
+ 		int color = Color.BLACK.getRGB();
+ 		
+ 		//Color.RED.getRGB(), Color.GREEN.getRGB(), Color.CYAN.getRGB(), Color.BLUE.getRGB()};
          for(int i = 0; i < w / size; i++){	// moi o pixel cach nhau = size
              for(int j = 0; j < h / size; j++){
                  g.drawRect(i * size, j * size, size, size);	// ve 1 o pixel co kich thuoc = size tai toa do i, j
-                 if(maTranPixel[i][j] == true && this.maTranMau[i][j] != Color.BLACK.getRGB()){	// xac dinh diem can put
-                	 this.maTranMau[i][j] = this.color.getRGB();
-                	 g.setColor(this.color);
+                 
+            	 if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.RED.getRGB()){	// xac dinh diem can put
+                	 g.setColor(Color.RED);
                      g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
                      g.setColor(Color.LIGHT_GRAY);
                  }
+            	 else if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.GREEN.getRGB()){	// xac dinh diem can put
+                	 g.setColor(Color.GREEN);
+                     g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
+                     g.setColor(Color.LIGHT_GRAY);
+                 } 
+            	 else if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.BLUE.getRGB()){	// xac dinh diem can put
+                	 g.setColor(Color.BLUE);
+                     g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
+                     g.setColor(Color.LIGHT_GRAY);
+                 }
+            	 else if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.CYAN.getRGB()){	// xac dinh diem can put
+                	 g.setColor(Color.CYAN);
+                     g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
+                     g.setColor(Color.LIGHT_GRAY);
+                 }
+            	 else if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.ORANGE.getRGB()){	// xac dinh diem can put
+                	 g.setColor(Color.ORANGE);
+                     g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
+                     g.setColor(Color.LIGHT_GRAY);
+                 } 
              }
          }
          
@@ -46,7 +70,7 @@ public class CreateGrP {
          for(int i = 0; i < w / size; i++){	// moi o pixel cach nhau = size
              for(int j = 0; j < h / size; j++){
                  if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.BLACK.getRGB()){	// xac dinh diem can put
-                	 this.maTranMau[i][j] = this.color.getRGB();
+                	 //this.maTranMau[i][j] = this.color.getRGB();
                 	 g.setColor(Color.BLACK);
                      g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
                      g.setColor(Color.LIGHT_GRAY);
@@ -54,21 +78,40 @@ public class CreateGrP {
              }
          }
          g.setColor(Color.RED);
-         g.drawLine(w / 2 + 1, 0, w / 2 + 1, h);
-         g.drawLine(0, h / 2 - 1, w, h / 2 - 1);
+         if(chon == 1) {
+        	 g.drawLine(w / 2 + 1, 0, w / 2 + 1, h);
+             g.drawLine(0, h / 2 - 7, w, h / 2 - 7);
+         }
+         else if(chon == 2) {
+        	 g.drawLine(w / 2 + 1, 0, w / 2 + 1, h / 2 - 7);
+        	 g.drawLine(w / 2 + 1, h / 2 - 7, w, h / 2 - 7);
+        	 g.drawLine(0, h, w / 2 + 1, h / 2 - 7);
+         }
+         
+         
  	}
  	
  	public void putPixel(int x, int y, Color c) {
- 		this.maTranPixel[x][y] = true;
- 		this.maTranMau[x][y] = c.getRGB();
- 		this.color = c;
+ 		
+ 		//if(x >= 0 && y >= 0 && x <= 279 && y <= 70) {
+ 			
+ 			this.maTranPixel[x][y] = true;
+ 	 		this.maTranMau[x][y] = c.getRGB();
+ 	 		this.color = c;
+ 		//}
+ 		
+ 	}
+ 	public void reputPixel(int x, int y) {
+ 		this.maTranPixel[x][y] = false;
+ 		this.maTranMau[x][y] = Color.LIGHT_GRAY.getRGB();
+ 		this.color = Color.LIGHT_GRAY;
  	}
  	
  	public void setMaTranPixel(int maxX, int maxY) {
  		for (int i = 0; i < maxX; i++) {
             for (int j = 0; j < maxY; j++) {
             	maTranPixel[i][j] = false;
-            	maTranMau[i][j] = Color.GRAY.getRGB();
+            	maTranMau[i][j] = Color.LIGHT_GRAY.getRGB();
             }
         }
  	}
@@ -92,6 +135,7 @@ public class CreateGrP {
 			}
 			for(int i = x1; i <= x2; i++){
 				putPixel(i, y, c);
+				
 			}
 			while(maTranMau[x1][y + 1] == Color.BLACK.getRGB()) {
 				x1++;
@@ -132,4 +176,6 @@ public class CreateGrP {
 			}
 		} while(x1 <= x2);
 	 }
+
+
 }

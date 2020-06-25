@@ -4,9 +4,15 @@
 package Libs;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import JFrame.Main;
 
 /**
  * @author HoaiphuLam
@@ -54,14 +60,12 @@ public class BasicEntities extends CreateGrP{
  	            p += b2*(2*x +3) + a2*(2- 2*y); //p=p +b2(2x +3) +a2(2-2y)
  	            fy -= 2*a2;
  	        }
-// 	        if(t % 9 < 5) {
-// 	        	super.putPixel(xc+x, yc-y);
-// 	        	super.putPixel(xc-x, yc-y);
-// 	        }
- 	        super.putPixel(xc+x, yc-y, Color.BLACK);
-        	super.putPixel(xc-x, yc-y, Color.BLACK);
- 	        super.putPixel(xc+x, yc+y, Color.BLACK);
- 	        super.putPixel(xc-x, yc+y, Color.BLACK);
+ 	        if(t % 9 < 5) {
+ 	        	super.putPixel(xc+x, yc-y, Color.BLACK);
+ 	        	super.putPixel(xc-x, yc-y, Color.BLACK);
+ 	        }
+ 	       super.putPixel(xc+x, yc+y, Color.BLACK);
+ 	       super.putPixel(xc-x, yc+y, Color.BLACK);
  	    }
  	    p = (int) Math.round(b2*(x +0.5)*(x +0.5) + a2*(y-1)*(y-1) - a2*b2);
  	    
@@ -80,10 +84,10 @@ public class BasicEntities extends CreateGrP{
  	            fx += 2*b2;
  	            p += b2*(2*x +2) +a2*(3- 2*y); //p=p+ b2(2x +2) + a2(3-2y)
  	        }
-// 	        if(t % 9 < 5) {
-// 	        	super.putPixel(xc+x, yc-y);
-// 	        	super.putPixel(xc-x, yc-y);
-//	        }
+ 	        if(t % 9 < 5) {
+ 	        	super.putPixel(xc+x, yc-y, Color.BLACK);
+ 	        	super.putPixel(xc-x, yc-y, Color.BLACK);
+	        }
  	        super.putPixel(xc+x, yc-y, Color.BLACK);
         	super.putPixel(xc-x, yc-y, Color.BLACK);
  	        super.putPixel(xc+x, yc+y, Color.BLACK);
@@ -303,5 +307,140 @@ public class BasicEntities extends CreateGrP{
  		y = y2;
  		dtDDA(x2, y2, x, y);
  		dtDDA(x, y, x1, y1);
+ 	}
+ 	
+ 	// 
+ 	public void ve2D1(Point tam){
+ 		Point left, right;
+ 		left = new Point();
+ 		right = new Point();
+ 		int khoangCach = 25, r = 20;
+ 		
+ 		
+ 		
+ 		left.x = tam.x - khoangCach;
+ 		left.y = tam.y - khoangCach;
+ 		right.x = tam.x + khoangCach;
+ 		right.y = tam.y - khoangCach;
+ 		
+ 		// ve tam giac tren cung
+ 		dtDDA(tam.x, tam.y - khoangCach*2, left.x, left.y);
+ 		dtDDA(tam.x, tam.y - khoangCach*2, right.x, right.y);
+ 		
+ 		// hcn bao quanh dong ho
+ 		hcnDDA(left.x, left.y, right.x, right.y + khoangCach*2);
+ 		super.toMauBien(left.x + 4, left.y + 12, Color.RED);
+ 		
+ 		// ve duong tron
+ 		midPointDTron(tam.x, tam.y, r);
+ 	 	super.toMauBien(tam.x, tam.y, Color.LIGHT_GRAY);
+ 	 	
+ 		// ve kim dong ho
+ 		super.putPixel(tam.x,  tam.y, Color.BLACK);
+ 		dtDDA(tam.x, tam.y, tam.x - 15, tam.y - 3); // kim phut
+ 		dtDDA(tam.x, tam.y, tam.x, tam.y + 7); // kim gio
+ 		
+ 		// hcn chan dong ho
+ 		hcnDDA(left.x + 5, left.y + khoangCach*2, right.x - 5, right.y + khoangCach*3 + 20);
+ 		super.toMauBien(left.x + 15, left.y + khoangCach*2 + 5, Color.GREEN);
+ 		
+ 		
+// 		Point tt = new Point();
+// 		tt.x = tam.x;
+// 		tt.y = tam.y;
+// 		Point tr = new Point();
+// 		tr.x = 10;
+// 		tr.y = 0;
+// 		while(tt.x <= 260) {
+// 			try {
+//				Thread.sleep(1000);
+//				super.setMaTranPixel(Param.maxX, Param.maxY);
+//				
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+// 		}
+ 	}
+ 	
+ 	public void ve2D2(Point tam) {
+ 		int r = 50, r1 = r - 43, khoangCach = 25;
+ 		Point left, right;
+ 		
+ 		left = new Point();
+ 		right = new Point();
+ 		
+ 		// ve tong the mat tron
+ 		midPointDTron(tam.x, tam.y, r);
+ 		
+ 		// ve 2 mat
+ 		// mat ben trai
+ 		left.x = tam.x - khoangCach;
+ 		left.y = tam.y - khoangCach + 5;
+ 		midPointDTron(left.x, left.y, r1);
+ 		//mat ben phai
+ 		right.x = tam.x + khoangCach;
+ 		right.y = tam.y - khoangCach + 5;
+ 		midPointDTron(right.x, right.y, r1);
+ 		
+ 		// ve mieng
+ 		int  ra = r - 20, rb = r - 40;
+ 		Point tamE = new Point();
+ 		tamE.x = tam.x;
+ 		tamE.y = tam.y + khoangCach;
+ 		midPointEclip(tamE.x, tamE.y, ra, rb);
+ 	}
+ 	
+ 	public void hinhCau(Point tam, int r) {
+ 		int r1 = r / 4;
+// 		int x1,y1,radius;
+//		x1= tam.x;
+//		y1= tam.y;
+//		radius= r;
+//		int x,y,p;
+//		x=0;
+//		y=radius;
+//		p=1-radius;
+//		
+//		
+//		
+//		while(x<y){
+//			super.putPixel(x+radius, radius-y, Color.BLACK);
+//			super.putPixel(y+radius, radius-x, Color.BLACK);
+//			super.putPixel(y+radius, radius-(-x), Color.BLACK);
+//			super.putPixel(x+radius, radius-(-y), Color.BLACK);
+//			super.putPixel(-x+radius, radius-(-y), Color.BLACK);
+//			super.putPixel(-y+radius, radius-(-x), Color.BLACK);
+//			super.putPixel(-y+radius, radius-x, Color.BLACK);
+//			super.putPixel(-x+radius, radius-y, Color.BLACK);
+//			
+//			
+//			
+//			if(p<0) p=p+(2*x+3);
+//			else{
+//				p=p+2*(x-y)+5;
+//				y--;
+//			}
+//			x++;
+//			
+//		}
+ 		midPointDTron(tam.x, tam.y, r);
+ 		midPointEclip(tam.x, tam.y, r, Math.abs(r1));
+		JPanel panelDraw = new JPanel(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void paintComponent(Graphics g) {
+				// TODO Auto-generated method stub
+				super.paintComponent(g);
+				drawPixel(g, Param.pnlGrid.getWidth(), Param.pnlGrid.getHeight(), 1);
+			}
+			
+		};
+		Param.pnlGrid.repaint();
+		
  	}
 }
