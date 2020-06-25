@@ -316,13 +316,7 @@ public class BasicEntities extends CreateGrP{
  		right = new Point();
  		int khoangCach = 25, r = 20;
  		
- 		// ve duong tron
- 		midPointDTron(tam.x, tam.y, r);
  		
- 		// ve kim dong ho
- 		super.putPixel(tam.x,  tam.y, Color.BLACK);
- 		dtDDA(tam.x, tam.y, tam.x - 15, tam.y - 3); // kim phut
- 		dtDDA(tam.x, tam.y, tam.x, tam.y + 7); // kim gio
  		
  		left.x = tam.x - khoangCach;
  		left.y = tam.y - khoangCach;
@@ -335,12 +329,20 @@ public class BasicEntities extends CreateGrP{
  		
  		// hcn bao quanh dong ho
  		hcnDDA(left.x, left.y, right.x, right.y + khoangCach*2);
- 		//super.toMauBien(tam.x, tam.y + 12, Color.RED);
- 		//super.toMauBien(tam.x, tam.y - 12, Color.RED);
+ 		super.toMauBien(left.x + 4, left.y + 12, Color.RED);
+ 		
+ 		// ve duong tron
+ 		midPointDTron(tam.x, tam.y, r);
+ 	 	super.toMauBien(tam.x, tam.y, Color.LIGHT_GRAY);
+ 	 	
+ 		// ve kim dong ho
+ 		super.putPixel(tam.x,  tam.y, Color.BLACK);
+ 		dtDDA(tam.x, tam.y, tam.x - 15, tam.y - 3); // kim phut
+ 		dtDDA(tam.x, tam.y, tam.x, tam.y + 7); // kim gio
  		
  		// hcn chan dong ho
  		hcnDDA(left.x + 5, left.y + khoangCach*2, right.x - 5, right.y + khoangCach*3 + 20);
- 		//super.toMauBien(left.x + 15, left.y + khoangCach*2 + 5, Color.GREEN);
+ 		super.toMauBien(left.x + 15, left.y + khoangCach*2 + 5, Color.GREEN);
  		
  		
 // 		Point tt = new Point();
@@ -390,7 +392,7 @@ public class BasicEntities extends CreateGrP{
  	}
  	
  	public void hinhCau(Point tam, int r) {
- 		int r1 = r -25;
+ 		int r1 = r / 4;
 // 		int x1,y1,radius;
 //		x1= tam.x;
 //		y1= tam.y;

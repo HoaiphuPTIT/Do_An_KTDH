@@ -93,12 +93,12 @@ public class CreateGrP {
  	
  	public void putPixel(int x, int y, Color c) {
  		
- 		if(x >= 0 && y >= 0 && x <= 279 && y <= 70) {
+ 		//if(x >= 0 && y >= 0 && x <= 279 && y <= 70) {
  			
  			this.maTranPixel[x][y] = true;
  	 		this.maTranMau[x][y] = c.getRGB();
  	 		this.color = c;
- 		}
+ 		//}
  		
  	}
  	public void reputPixel(int x, int y) {
@@ -111,7 +111,7 @@ public class CreateGrP {
  		for (int i = 0; i < maxX; i++) {
             for (int j = 0; j < maxY; j++) {
             	maTranPixel[i][j] = false;
-            	maTranMau[i][j] = Color.GRAY.getRGB();
+            	maTranMau[i][j] = Color.LIGHT_GRAY.getRGB();
             }
         }
  	}

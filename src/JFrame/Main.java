@@ -30,6 +30,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout.Group;
 import javax.swing.JTabbedPane;
 import java.awt.Panel;
+import java.awt.BorderLayout;
 
 public class Main extends JFrame implements Runnable{
 
@@ -276,7 +277,7 @@ public class Main extends JFrame implements Runnable{
 			Param.pnlGrid.repaint();
 		}
 		else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 0) {
-			be.hinhCau(O, 80);
+			be.hinhCau(O, 40);
 			hinh = 3;
 		}
 	}

@@ -28,10 +28,10 @@ public class MatrixTransform {
 	
 	public int[][] rotateMatrix(int[][] defMatrix, double goc){
 		
-		this.rotation[0][0] = (int) Math.cos(goc);
-		this.rotation[0][1] = (int) Math.sin(goc);
-		this.rotation[1][0] = -(int) Math.sin(goc);
-		this.rotation[1][1] = (int) Math.cos(goc);
+		this.rotation[0][0] = (int) (Math.cos(goc) * 10);
+		this.rotation[0][1] = (int) (Math.sin(goc) * 10);
+		this.rotation[1][0] = -(int) (Math.sin(goc) * 10);
+		this.rotation[1][1] = (int) (Math.cos(goc) * 10);
 		System.out.println(this.rotation[0][0]);
 		int[][] C = new int[1][3];
 		
