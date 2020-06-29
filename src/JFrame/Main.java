@@ -73,30 +73,55 @@ public class Main extends JFrame implements Runnable{
 //		});
 	}
 	public void run() {
-		if(this.hinh == 0) {
-			//System.out.println("Vao 1");
-			Point tam = new Point();
-			tam = O;
-			Point tr = new Point();
-	 		tr.x = 10;
-	 		tr.y = 0;
-			Transformations tf = new Transformations();
-			be.ve2D1(tam);
-			while(tam.x <= 270) {
-				try {
-					be.ve2D1(tam);
-					tam = tf.tinhTien(tam, tr);
-					Thread.sleep(1000);
-					be.setMaTranPixel(Param.maxX, Param.maxY);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		while(true) {
+			//System.out.println("While"+hinh);
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			if(this.hinh == 1) {
+				//System.out.println("Vao 1");
+				Point tam = new Point();
+				tam = O;
+				Point tr = new Point();
+		 		tr.x = 10;
+		 		tr.y = 0;
+		 		
+				Transformations tf = new Transformations();
+				be.ve2D1(tam);
+				while(tam.x <= 250) {
+					try {
+						be.ve2D1(tam);
+						tam = tf.tinhTien(tam, tr);
+						Thread.sleep(100);
+						be.setMaTranPixel(Param.maxX, Param.maxY);
+						Param.pnlGrid.repaint();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
+			else if(this.hinh == 2) {
+				be.ve2D2(O);
+				Param.pnlGrid.repaint();
+			}
+			else if(this.hinh == 3) {
+				be.hinhCau(O, 40);
+				Param.pnlGrid.repaint();
+			}
+			else if(this.hinh == 4) {
+				be.hinhCau(O, 40);
+				Param.pnlGrid.repaint();
+			}
+			else if(this.hinh == 0) {
+				be.setMaTranPixel(Param.maxX, Param.maxY);
+				Param.pnlGrid.repaint();
+			}	
 		}
-		else {
-			System.out.println("Vao else"+hinh);
-		}
+		
 	}
 
 	/**
@@ -144,9 +169,8 @@ public class Main extends JFrame implements Runnable{
 		
 		JButton btnClear = new JButton("Clear");
 		btnClear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				be.setMaTranPixel(Param.maxX, Param.maxY);
-				Param.pnlGrid.repaint();
+			public void actionPerformed(ActionEvent e) {
+				btnClearactionPerformed(e);
 			}
 		});
 		btnClear.setBounds(1605, 13, 97, 25);
@@ -220,6 +244,8 @@ public class Main extends JFrame implements Runnable{
 		
 		Param.contentPane.add(r2D);
 		Param.contentPane.add(r3D);
+		
+		
 	}
 	
 	protected void pnlGridmouseMoved(MouseEvent e) {
@@ -258,7 +284,35 @@ public class Main extends JFrame implements Runnable{
 	
 	
 	protected void pnlGridmouseClicked(MouseEvent e) {
-		
+			//Param.createToaDo2D = new JFrame();
+			
+			if(r2D.isSelected() && cmb2D.getSelectedIndex() == 0) {
+//				Point dinh, trai, phai;
+//				int a = 65, b = 25;
+//				dinh = new Point(O.x, O.y - a);
+//				trai = new Point(O.x - b, O.y - b);
+//				phai = new Point(O.x + b, O.y - b);
+				this.hinh = 1;
+			}
+			else if(r2D.isSelected() && cmb2D.getSelectedIndex() == 1) {
+				
+				this.hinh = 2;
+			}
+			else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 0) {
+				FrameHinhCau fr = new FrameHinhCau();
+				Param.createToaDo2D = fr.createToaDo2D();
+				this.hinh = 3;
+			}
+			else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 1) {
+				
+				this.hinh = 4;
+			}
+	}
+	
+	protected void btnClearactionPerformed(ActionEvent e) {
+		this.hinh = 0;
+		be.setMaTranPixel(Param.maxX, Param.maxY);
+		Param.pnlGrid.repaint();
 	}
 	
 	protected void btnDrawactionPerformed(ActionEvent e){
@@ -268,17 +322,19 @@ public class Main extends JFrame implements Runnable{
 //			dinh = new Point(O.x, O.y - a);
 //			trai = new Point(O.x - b, O.y - b);
 //			phai = new Point(O.x + b, O.y - b);
-			
 			this.hinh = 1;
 		}
 		else if(r2D.isSelected() && cmb2D.getSelectedIndex() == 1) {
-			be.ve2D2(O);
 			
-			Param.pnlGrid.repaint();
+			this.hinh = 2;
 		}
 		else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 0) {
-			be.hinhCau(O, 40);
-			hinh = 3;
+			
+			this.hinh = 3;
+		}
+		else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 1) {
+			
+			this.hinh = 4;
 		}
 	}
 	
