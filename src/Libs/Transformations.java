@@ -23,7 +23,7 @@ public class Transformations {
 		return C;
 	}
 	
-	public Point quay(Point A, int goc) {
+	public Point quay(Point A, double goc) {
 		int[][] defMatrix = {{A.x, A.y, 1}};
 		
 		Point C = new Point();
@@ -35,5 +35,13 @@ public class Transformations {
 		C.y = defMatrix[0][1];
 		
 		return C;
+	}
+	
+	public Point quay2(Point A, double deg) {
+		Point B = new Point();
+		B.x = (int)(Math.round(A.x * Math.cos(deg) - A.y * Math.sin(deg)));
+		B.y = (int)(Math.round(A.x * Math.sin(deg) + A.y * Math.cos(deg)));
+		System.out.println(B.x + ", " + B.y);
+		return B;
 	}
 }

@@ -27,5 +27,6 @@ public class Param {
 	public static int size = 6;
 	public static int maxX = 1678 / size; // do dai grid
 	public static int maxY = 854 / size; // do rong grid
-	
+	public static Point tamO = new Point(0, 0, 0);
+	public static int R = 0;
 }

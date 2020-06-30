@@ -310,7 +310,7 @@ public class BasicEntities extends CreateGrP{
  	}
  	
  	// 
- 	public void ve2D1(Point tam){
+ 	public void ve2D1(Point tam, Point H, Point M){
  		Point left, right;
  		left = new Point();
  		right = new Point();
@@ -337,7 +337,7 @@ public class BasicEntities extends CreateGrP{
  	 	
  		// ve kim dong ho
  		super.putPixel(tam.x,  tam.y, Color.BLACK);
- 		dtDDA(tam.x, tam.y, tam.x - 15, tam.y - 3); // kim phut
+ 		dtDDA(tam.x, tam.y, H.x, H.y); // kim phut
  		dtDDA(tam.x, tam.y, tam.x, tam.y + 7); // kim gio
  		
  		// hcn chan dong ho
@@ -425,7 +425,7 @@ public class BasicEntities extends CreateGrP{
 //			
 //		}
  		midPointDTron(tam.x, tam.y, r);
- 		midPointEclip(tam.x, tam.y, r, Math.abs(r1));
+ 		midPointEclip(tam.x, tam.y, r, r1);
 		JPanel panelDraw = new JPanel(){
 			/**
 			 * 
