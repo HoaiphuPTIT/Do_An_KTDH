@@ -1,5 +1,5 @@
 package JFrame;
-import Libs.BasicEntities;
+import Libs.Entities;
 import Libs.CreateGrP;
 import Libs.Point;
 import Libs.Transformations;
@@ -37,8 +37,8 @@ public class Main extends JFrame implements Runnable{
 	//public JPanel contentPane;
 	//public JPanel pnlGrid;
 	private JLabel lblToado;
-	private JComboBox cmb2D;
-	private JComboBox cmb3D;
+	private JComboBox<String> cmb2D;
+	private JComboBox<String> cmb3D;
 	private JRadioButton r2D;
 	private JRadioButton r3D;
 	private ButtonGroup bg;
@@ -52,7 +52,7 @@ public class Main extends JFrame implements Runnable{
 	int hinh = 0;
     private CreateGrP lib;
 	private Point O;
-	private BasicEntities be;
+	private Entities be;
 	/**
 	 * Launch the application.
 	 */
@@ -95,13 +95,14 @@ public class Main extends JFrame implements Runnable{
 				Point tr = new Point();
 		 		tr.x = 10;
 		 		tr.y = 0;
-		 		
+		 		double deg = 0.1;
 				Transformations tf = new Transformations();
 				be.ve2D1(tam, H, M);
-				while(tam.x <= 250) {
+				while(deg <= 1) {
 					try {
 						be.ve2D1(tam, H, M);
-						H = tf.quay2(H, 0.1);
+						H = tf.quay2(tam, deg);
+						deg += 0.1;
 						Thread.sleep(100);
 						be.setMaTranPixel(Param.maxX, Param.maxY);
 						Param.pnlGrid.repaint();
@@ -112,7 +113,33 @@ public class Main extends JFrame implements Runnable{
 				}
 			}
 			else if(this.hinh == 2) {
-				be.ve2D2(O);
+				Transformations tf = new Transformations();
+				Point A = new Point(130, 20);
+				Point B = new Point(165, 20);
+				Point dinh = new Point(135, 20);
+				Point x,y,z;
+				x = new Point();
+				y = new Point();
+				z = new Point();
+				be.object2D(dinh, A, B);
+				Point tr = new Point(1, 0);
+				while(tr.x <= 50) {
+					try {
+						
+						x = tf.tinhTien(A, tr);
+						y = tf.tinhTien(B, tr);
+						z = tf.tinhTien(dinh, tr);
+						be.object2D(z, x, y);
+						tr.x += 1;
+						Thread.sleep(100);
+						be.setMaTranPixel(Param.maxX, Param.maxY);
+						Param.pnlGrid.repaint();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
 				Param.pnlGrid.repaint();
 			}
 			else if(this.hinh == 3) {
@@ -385,7 +412,7 @@ public class Main extends JFrame implements Runnable{
         //System.out.println(pnlGrid.getWidth() + " -> " + maxX + " / 2 -> " + maxX / 2);
         //System.out.println(pnlGrid.getHeight() + " -> " + maxY + " / 2 -> " + maxY / 2);
         
-        be = new BasicEntities(Param.maxX, Param.maxY);
+        be = new Entities(Param.maxX, Param.maxY);
         be.setMaTranPixel(Param.maxX, Param.maxY);
         O = new Point();
         O.x = Param.maxX / 2 + 1; // 140 
