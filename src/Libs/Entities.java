@@ -18,9 +18,9 @@ import JFrame.Main;
  * @author HoaiphuLam
  *
  */
-public class BasicEntities extends CreateGrP{
+public class Entities extends CreateGrP{
 	
-	public BasicEntities(int maxX, int maxY) {
+	public Entities(int maxX, int maxY) {
 		super(maxX, maxY);
 		// TODO Auto-generated constructor stub
 	}
@@ -309,6 +309,77 @@ public class BasicEntities extends CreateGrP{
  		dtDDA(x, y, x1, y1);
  	}
  	
+ 	// hinh tam giac
+ 	public void tripleRec(Point dinh, int chRong, int chCao, int type) {
+ 		Point left, right;
+ 		
+ 		left = new Point();
+ 		right = new Point();
+ 		
+ 		if(type == 0) { 
+ 			left.x = dinh.x - chRong;
+ 	 		left.y = dinh.y + chCao;
+ 	 		
+ 	 		right.x = dinh.x + chRong;
+ 	 		right.y = dinh.y + chCao;
+ 		}
+ 		else if(type == 1) { // hinh tam giac nguoc
+ 			left.x = dinh.x - chRong;
+ 	 		left.y = dinh.y - chCao;
+ 	 		
+ 	 		right.x = dinh.x + chRong;
+ 	 		right.y = dinh.y - chCao;
+ 		}
+ 		
+ 		dtDDA(dinh.x, dinh.y, left.x, left.y);
+ 		dtDDA(dinh.x, dinh.y, right.x, right.y);
+ 		dtDDA(left.x, left.y, right.x, right.y);
+ 	}
+ 	
+ 	// hinh tam giac vuong
+  	public void tripleRecL(Point dinh, int chRong, int chCao, int type) {
+  		Point left, right;
+  		
+  		left = new Point();
+  		right = new Point();
+  		
+  		if(type == 0) {
+  			left.x = dinh.x;
+  	  		left.y = dinh.y + chCao;
+  	  		
+  	  		right.x = dinh.x + chRong;
+  	  		right.y = dinh.y + chCao;
+  		}
+  		else if(type == 1) {
+  			left.x = dinh.x;
+  	  		left.y = dinh.y - chCao;
+  	  		
+  	  		right.x = dinh.x + chRong;
+  	  		right.y = dinh.y - chCao;
+  		}
+  		
+  		dtDDA(dinh.x, dinh.y, left.x, left.y);
+  		dtDDA(dinh.x, dinh.y, right.x, right.y);
+  		dtDDA(left.x, left.y, right.x, right.y);
+  	}
+  	
+ // hinh tam giac nam
+  	public void tripleRecNam(Point dinh, int chRong, int chCao) {
+  		Point up, down;
+  		
+  		up = new Point();
+  		up.x = dinh.x - chCao;
+  		up.y = dinh.y - chRong;
+  		
+  		down = new Point();
+  		down.x = dinh.x - chCao;
+  		down.y = dinh.y + chCao;
+  		
+  		dtDDA(dinh.x, dinh.y, up.x, up.y);
+  		dtDDA(dinh.x, dinh.y, down.x, down.y);
+  		dtDDA(up.x, up.y, down.x, down.y);
+  	}
+ 	
  	// 
  	public void ve2D1(Point tam, Point H, Point M){
  		Point left, right;
@@ -389,6 +460,71 @@ public class BasicEntities extends CreateGrP{
  		tamE.x = tam.x;
  		tamE.y = tam.y + khoangCach;
  		midPointEclip(tamE.x, tamE.y, ra, rb);
+ 	}
+ 	
+ 	// ve cac doi tuong 2D
+ 	// ve may bay chien dau
+ 	public void mbChiendau(Point dinh, Point A, Point B) {
+ 		// ve canh tren
+ 		
+ 		int kc2Canh = 10;
+ 		int chCao = 15;
+ 		int chRong = 10;
+ 		int crMB = 8;
+ 		
+ 		Point dinhtam = new Point();
+ 		dinhtam.x = dinh.x;
+ 		dinhtam.y = dinh.y;
+ 		dtDDA(A.x, A.y, B.x, B.y);
+ 		dinhtam.y = dinh.y - chCao;
+ 		
+ 		tripleRecL(dinhtam, chRong, chCao, 0);
+ 		dinhtam.x = dinh.x - kc2Canh;
+ 		dinhtam.y = dinh.y - chCao / 2;
+ 		tripleRecL(dinhtam, chRong / 2, chCao / 2, 0);
+ 		
+ 		// ve canh duoi
+ 		Point _A = new Point();
+ 		_A.x = A.x;
+ 		_A.y = A.y + crMB;
+ 		Point _B = new Point();
+ 		_B.x = B.x;
+ 		_B.y = B.y + crMB;
+ 		dinhtam.y = dinh.y + crMB*3 - 1;
+ 		dinhtam.x = dinh.x;
+ 		dtDDA(_A.x, _A.y, _B.x, _B.y);
+ 		tripleRecL(dinhtam, chRong, chCao, 1);
+ 		dinhtam.x = dinh.x - kc2Canh;
+ 		dinhtam.y = dinhtam.y - chCao / 2 - 1;
+ 		tripleRecL(dinhtam, chRong / 2, chCao / 2, 1);
+ 		
+ 		// ve mui may bay
+ 		dinhtam.y = _B.y;
+ 		dinhtam.x = _B.x + 10;
+ 		dtDDA(_B.x, _B.y, _B.x, _B.y - crMB);
+ 		dtDDA(_B.x, _B.y, dinhtam.x, dinhtam.y - crMB / 2);
+ 		dtDDA(_B.x, _B.y - crMB, dinhtam.x, dinhtam.y - crMB / 2);
+ 		
+ 		// ve duoi may bay
+ 		dinhtam.y = _A.y;
+ 		dinhtam.x = _A.x - 10;
+ 		_A.x = A.x - 5;
+ 		dtDDA(_A.x, _A.y, _A.x, _A.y - crMB);
+ 		dtDDA(_A.x, _A.y, dinhtam.x, dinhtam.y - crMB / 2);
+ 		dtDDA(_A.x, _A.y - crMB, dinhtam.x, dinhtam.y - crMB / 2);
+ 		
+ 		// to mau
+ 		super.toMauBien(A.x + 2, A.y + 2, Color.WHITE);
+ 		super.toMauBien(_B.x + 2, dinhtam.y - crMB / 2, Color.WHITE);
+ 		super.toMauBien(A.x - 5, A.y + 4, Color.RED);
+ 		super.toMauBien(dinh.x + 1, dinh.y - 3, Color.GREEN);
+ 		super.toMauBien(dinh.x + 1, dinh.y + 3 + crMB, Color.GREEN);
+ 		super.toMauBien(dinh.x - kc2Canh + 2, dinh.y + 3 + crMB, Color.GREEN);
+ 		super.toMauBien(dinh.x - kc2Canh + 2, dinh.y - 3 , Color.GREEN);
+ 	}
+ 	public void object2D(Point dinh, Point A, Point B) {
+ 		
+ 		mbChiendau(dinh, A, B);
  	}
  	
  	public void hinhCau(Point tam, int r) {

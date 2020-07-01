@@ -10,6 +10,7 @@ public class Param {
 	public static JFrame createToaDo2D;
 	public static JPanel contentPane;
 	public static JPanel pnlGrid;
+	
 	public static JTextField txtX1;
 	public static JTextField txtY1;
 	public static JTextField txtZ1;

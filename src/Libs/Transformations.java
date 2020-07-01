@@ -44,4 +44,17 @@ public class Transformations {
 		System.out.println(B.x + ", " + B.y);
 		return B;
 	}
+	
+	public Point doiXung(Point E, Point M, int type) {
+		Point _M = new Point();
+		if(type == 0) {
+			_M.x = 2 * E.x - M.x;
+			_M.y = 2 * E.x - M.y;
+		}
+		else if(type == 1) {
+			_M.x = 2 * E.y - M.x;
+			_M.y = 2 * E.y - M.y;
+		}
+		return _M;
+	}
 }

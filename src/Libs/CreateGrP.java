@@ -63,6 +63,11 @@ public class CreateGrP {
                      g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
                      g.setColor(Color.LIGHT_GRAY);
                  } 
+            	 else if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.WHITE.getRGB()){	// xac dinh diem can put
+                	 g.setColor(Color.WHITE);
+                     g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
+                     g.setColor(Color.LIGHT_GRAY);
+                 } 
              }
          }
          
@@ -93,12 +98,11 @@ public class CreateGrP {
  	
  	public void putPixel(int x, int y, Color c) {
  		
- 		//if(x >= 0 && y >= 0 && x <= 279 && y <= 70) {
- 			
- 			this.maTranPixel[x][y] = true;
- 	 		this.maTranMau[x][y] = c.getRGB();
- 	 		this.color = c;
- 		//}
+		this.maTranPixel[x][y] = true;
+ 		this.maTranMau[x][y] = c.getRGB();
+ 		this.color = c;
+ 		
+		
  		
  	}
  	public void reputPixel(int x, int y) {
