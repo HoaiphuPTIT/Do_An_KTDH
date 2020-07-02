@@ -522,9 +522,81 @@ public class Entities extends CreateGrP{
  		super.toMauBien(dinh.x - kc2Canh + 2, dinh.y + 3 + crMB, Color.GREEN);
  		super.toMauBien(dinh.x - kc2Canh + 2, dinh.y - 3 , Color.GREEN);
  	}
- 	public void object2D(Point dinh, Point A, Point B) {
+ 	// ve bot ban dan
+ 	public void bot() {
+ 		Point _dinh, _A, _B;
+ 		_dinh = new Point();
+ 		_A = new Point();
+ 		_B = new Point();
+ 		
+ 		Point left, right;
+ 		left = new Point();
+ 		right = new Point();
+ 		
+ 		int chDai = 25;
+ 		int chRong = 10;
+ 		
+ 		// xac dinh tam cua bot
+ 		_dinh.x = 140;
+ 		_dinh.y = 130;
+ 		_A.x = 137;
+ 		_A.y = _dinh.y - chRong + 2;
+ 		_B.x = 143;
+ 		_B.y = _dinh.y - chDai - 2;
+ 		
+ 		left.x = _dinh.x - chDai;
+ 		left.y = _dinh.y;
+ 		right.x = _dinh.x + chDai;
+ 		right.y = _dinh.y + chRong;
+ 		
+ 		// ve hinh chu nhat duoi 
+ 		hcnDDA(left.x, left.y, right.x, right.y);
+ 		
+ 		// ve hcn tren
+ 		right.x = _dinh.x + chDai;
+ 		right.y = _dinh.y - chRong + 2;
+ 		hcnDDA(left.x + 5, left.y, right.x - 5, right.y);
+ 		
+ 		// ve nong sung
+ 		hcnDDA(_A.x, _A.y, _B.x, _B.y);
+ 		
+ 		// to mau
+ 		super.toMauBien(_dinh.x, _dinh.y + 1, Color.DARK_GRAY);
+ 		super.toMauBien(_dinh.x, _dinh.y - 1, Color.DARK_GRAY);
+ 		super.toMauBien(_dinh.x, _dinh.y - chRong - 3, Color.GREEN);
+ 	}
+ 	// ve vien dan
+ 	public void dan(Point tam, int r) {
+ 		midPointDTron(tam.x, tam.y, r);
+ 		super.toMauBien(tam.x, tam.y, Color.GREEN);
+ 	}
+ 	// ve may
+ 	public void may(Point tam, int r) {
+ 		
+ 		
+ 		midPointEclip(tam.x, tam.y+6, r+20, r);
+ 		super.toMauBien(tam.x, tam.y+6, Color.WHITE);
+ 		midPointDTron(tam.x, tam.y, r+3);
+ 		super.toMauBien(tam.x, tam.y, Color.WHITE);
+ 		midPointDTron(tam.x-10, tam.y, r-2);
+ 		super.toMauBien(tam.x-10, tam.y, Color.WHITE);
+ 		midPointDTron(tam.x+12, tam.y, r);
+ 		super.toMauBien(tam.x+12, tam.y, Color.WHITE);
+ 	}
+ 	//xoa may bay va vien dan
+ 	public void del() {
+ 		for(int i = 0; i < Param.pnlGrid.getWidth() / Param.size; i++){	// moi o pixel cach nhau = size
+            for(int j = 0; j < 421 / Param.size; j++){
+            	super.reputPixel(i, j);
+            }
+ 		}
+ 	}
+ 	public void object2D(Point dinh, Point A, Point B, Point tam, int r, Point tammay, int r1) {
  		
  		mbChiendau(dinh, A, B);
+ 		bot();
+ 		dan(tam, r);
+ 		may(tammay, r1);
  	}
  	
  	public void hinhCau(Point tam, int r) {

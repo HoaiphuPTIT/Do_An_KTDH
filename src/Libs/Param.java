@@ -23,7 +23,7 @@ public class Param {
 	public static JButton btnDraw;
 	public static JButton btnCls;
 	
-	public static int subFrameWidth=275,subFrameHight=250,xOBegin=10,yOBegin=25,khoangCach=100,labelSize=25,textSize=75;
+	//public static int subFrameWidth=275,subFrameHight=250,xOBegin=10,yOBegin=25,khoangCach=100,labelSize=25,textSize=75;
 	
 	public static int size = 6;
 	public static int maxX = 1678 / size; // do dai grid
