@@ -33,7 +33,7 @@ public class Entities extends CreateGrP{
 		super.putPixel(xc-r1, yc-r2, Color.BLACK);
  	}
  	
- 	public void midPointEclip(int xc, int yc, int A, int B) {
+ 	public void midPointEclipNetDut(int xc, int yc, int A, int B) {
  		
  		int x, y, fx, fy, a2, b2, p;
  	    x = 0;
@@ -94,7 +94,69 @@ public class Entities extends CreateGrP{
  	        super.putPixel(xc-x, yc+y, Color.BLACK);
  	    }
  	}
- 	
+ 	public void midPointEclip(int xc, int yc, int A, int B) {
+ 		
+ 		int x, y, fx, fy, a2, b2, p;
+ 	    x = 0;
+ 	    y = B;
+ 	    a2 = A * A;
+ 	    b2 = B * B;
+ 	    fx = 0;
+ 	    fy = 2 * a2 * y;
+ 	  	put4Pixel(xc, yc, x, y);
+ 	    p = (int) Math.round(b2 - (a2 * B) + (0.25 * a2)); //p=b2 - a2*b +a2/4
+ 	    int t = 0;
+ 	    while(fx < fy)
+ 	    {
+ 	    	t++;
+ 	        x++;
+ 	        fx += 2 * b2;
+ 	        if(p < 0)
+ 	        {
+ 	            p += b2 * (2 * x + 3); //p=p + b2*(2x +3)
+ 	        }
+ 	        else
+ 	        {
+ 	            y--;
+ 	            p += b2*(2*x +3) + a2*(2- 2*y); //p=p +b2(2x +3) +a2(2-2y)
+ 	            fy -= 2*a2;
+ 	        }
+// 	        if(t % 9 < 5) {
+// 	        	super.putPixel(xc+x, yc-y, Color.BLACK);
+// 	        	super.putPixel(xc-x, yc-y, Color.BLACK);
+// 	        }
+ 	       super.putPixel(xc+x, yc-y, Color.BLACK);
+ 	       super.putPixel(xc-x, yc-y, Color.BLACK);
+ 	       super.putPixel(xc+x, yc+y, Color.BLACK);
+ 	       super.putPixel(xc-x, yc+y, Color.BLACK);
+ 	    }
+ 	    p = (int) Math.round(b2*(x +0.5)*(x +0.5) + a2*(y-1)*(y-1) - a2*b2);
+ 	    
+ 	    while(y > 0)
+ 	    {
+ 	    	t++;
+ 	        y--;
+ 	        fy -= 2*a2;
+ 	        if(p >=0)
+ 	        {
+ 	            p += a2*(3-2*y); //p=p +a2(3-2y)
+ 	        }
+ 	        else
+ 	        {
+ 	            x++;
+ 	            fx += 2*b2;
+ 	            p += b2*(2*x +2) +a2*(3- 2*y); //p=p+ b2(2x +2) + a2(3-2y)
+ 	        }
+// 	        if(t % 9 < 5) {
+// 	        	super.putPixel(xc+x, yc-y, Color.BLACK);
+// 	        	super.putPixel(xc-x, yc-y, Color.BLACK);
+//	        }
+ 	        super.putPixel(xc+x, yc-y, Color.BLACK);
+ 	        super.putPixel(xc-x, yc-y, Color.BLACK);
+ 	        super.putPixel(xc+x, yc+y, Color.BLACK);
+ 	        super.putPixel(xc-x, yc+y, Color.BLACK);
+ 	    }
+ 	}
  	
  	// vẽ đường tròn
  	public void put8Pixel(int xc, int yc, int x, int y) {
@@ -357,6 +419,13 @@ public class Entities extends CreateGrP{
   	  		right.x = dinh.x + chRong;
   	  		right.y = dinh.y - chCao;
   		}
+  		else if(type == 2) {
+  			left.x = dinh.x - chRong;
+  			left.y = dinh.y + chCao;
+  			
+  			right.x = dinh.x;
+  			right.y = dinh.y + chCao;
+  		}
   		
   		dtDDA(dinh.x, dinh.y, left.x, left.y);
   		dtDDA(dinh.x, dinh.y, right.x, right.y);
@@ -459,7 +528,7 @@ public class Entities extends CreateGrP{
  		Point tamE = new Point();
  		tamE.x = tam.x;
  		tamE.y = tam.y + khoangCach;
- 		midPointEclip(tamE.x, tamE.y, ra, rb);
+ 		midPointEclipNetDut(tamE.x, tamE.y, ra, rb);
  	}
  	
  	// ve cac doi tuong 2D
@@ -583,57 +652,110 @@ public class Entities extends CreateGrP{
  		midPointDTron(tam.x+12, tam.y, r);
  		super.toMauBien(tam.x+12, tam.y, Color.WHITE);
  	}
- 	//xoa may bay va vien dan
- 	public void del() {
+ 	// to mau nen
+ 	public void toBG() {
  		for(int i = 0; i < Param.pnlGrid.getWidth() / Param.size; i++){	// moi o pixel cach nhau = size
-            for(int j = 0; j < 421 / Param.size; j++){
-            	super.reputPixel(i, j);
+            for(int j = 0; j < Param.pnlGrid.getHeight() / Param.size; j++){
+            	
+            	super.putPixel(i, j, Color.CYAN);
             }
  		}
  	}
+ 	// hinh chuyen dong 1
  	public void object2D(Point dinh, Point A, Point B, Point tam, int r, Point tammay, int r1) {
- 		
+ 		toBG();
  		mbChiendau(dinh, A, B);
  		bot();
  		dan(tam, r);
  		may(tammay, r1);
+ 		Point _tammay = new Point(tammay.x + 60, tammay.y + 20);
+ 		may(_tammay, r1);
+ 		Point _tammay2 = new Point(tammay.x + 160, tammay.y + 10);
+ 		may(_tammay2, r1);
  	}
  	
+ 	// ve thuyen
+ 	public void thuyen(Point tamTh, Point Left, Point Right) {
+ 		// khai bao 
+ 		int chCao_1 = 7,
+ 			chCao_2 = 10,
+ 			chRong_1 = 20,
+ 			chRong_2 = 17,
+ 			chRong_3 = 13;
+ 		
+ 		// ve day thuyen
+ 		Point _Left = new Point(Left.x + 7, Left.y + chCao_2),
+ 			  _Right = new Point(Right.x - 3, Right.y + chCao_2);
+ 		
+ 		dtDDA(Left.x, Left.y, Right.x, Right.y);
+ 		dtDDA(_Left.x, _Left.y, _Right.x, _Right.y);
+ 		dtDDA(Left.x, Left.y, _Left.x, _Left.y);
+ 		dtDDA(Right.x, Right.y, _Right.x, _Right.y);
+ 		 
+ 		// ve hcn duoi
+ 		Point ULeft = new Point(tamTh.x - chRong_1, tamTh.y - chCao_1),
+ 	 		  DRight = new Point(tamTh.x + chRong_1, tamTh.y);
+ 		hcnDDA(ULeft.x, ULeft.y, DRight.x, DRight.y);
+ 		
+ 	 	// ve canh buom
+ 		Point _tam = new Point(tamTh.x, tamTh.y - chCao_2*4);
+ 		
+ 		// ve cot buom
+ 		dtDDA(tamTh.x, tamTh.y - chCao_1, _tam.x, _tam.y);
+ 		
+ 		//ve canh buom 2 ben
+ 		tripleRecL(_tam, chRong_2, chCao_2*3 - 3, 0);
+ 		tripleRecL(_tam, chRong_3, chCao_2*3 - 3, 2);
+ 		// to mau day thuyen
+ 		super.toMauBien(tamTh.x, tamTh.y + 5, Color.ORANGE);
+ 		
+ 		// ve hinh tron trong day thuyen
+ 		midPointDTron(tamTh.x, tamTh.y + 5, 3);
+ 		midPointDTron(tamTh.x - 15, tamTh.y + 5, 3);
+ 		midPointDTron(tamTh.x + 15, tamTh.y + 5, 3);
+ 		super.toMauBien(tamTh.x, tamTh.y + 5, Color.RED);
+ 		super.toMauBien(tamTh.x - 15, tamTh.y + 5, Color.RED);
+ 		super.toMauBien(tamTh.x + 15, tamTh.y + 5, Color.RED);
+ 		
+ 		// to mau 
+ 		super.toMauBien(tamTh.x, tamTh.y - 5, Color.ORANGE);
+ 		super.toMauBien(_tam.x - 5, _tam.y + 15, Color.GREEN);
+ 		super.toMauBien(_tam.x + 5, _tam.y + 15, Color.GREEN);
+ 	}
+ 	// ve may
+ 	public void mayNho(Point tam, int r1, int r2) {
+ 		midPointEclip(tam.x, tam.y, r1, r2);
+ 		super.toMauBien(tam.x, tam.y, Color.DARK_GRAY);
+ 		midPointEclip(tam.x + 80, tam.y + 23, r1, r2);
+ 		super.toMauBien(tam.x + 80, tam.y + 23, Color.WHITE);
+ 		midPointEclip(tam.x + 180, tam.y + 10, r1, r2);
+ 		super.toMauBien(tam.x + 180, tam.y + 10, Color.DARK_GRAY);
+ 		midPointEclip(tam.x + 200, tam.y + 20, r1, r2);
+ 		super.toMauBien(tam.x + 200, tam.y + 20, Color.WHITE);
+ 	}
+ 	// ve mat troi
+ 	public void matTroi(Point tam, int r) {
+ 		midPointDTron(tam.x, tam.y, r);
+ 		super.toMauBien(tam.x, tam.y, Color.YELLOW);
+ 	}
+ 	// to mau ben
+ 	public void BGThuyen() {
+ 		hcnDDA(0, 0, 278, 50);
+ 		super.toMauBien(5, 5, Color.CYAN);
+ 		hcnDDA(0, 50, 278, 141);
+ 		super.toMauBien(5, 60, Color.BLUE);
+ 	}
+ 	public void object2D2(Point tamTh, Point Left, Point Right, Point tam, int r, Point tamMay, int r1, int r2) {
+ 		BGThuyen();
+ 		thuyen(tamTh, Left, Right);
+ 		mayNho(tamMay, r1, r2);
+ 		matTroi(tam, r);
+ 	}
  	public void hinhCau(Point tam, int r) {
  		int r1 = r / 4;
-// 		int x1,y1,radius;
-//		x1= tam.x;
-//		y1= tam.y;
-//		radius= r;
-//		int x,y,p;
-//		x=0;
-//		y=radius;
-//		p=1-radius;
-//		
-//		
-//		
-//		while(x<y){
-//			super.putPixel(x+radius, radius-y, Color.BLACK);
-//			super.putPixel(y+radius, radius-x, Color.BLACK);
-//			super.putPixel(y+radius, radius-(-x), Color.BLACK);
-//			super.putPixel(x+radius, radius-(-y), Color.BLACK);
-//			super.putPixel(-x+radius, radius-(-y), Color.BLACK);
-//			super.putPixel(-y+radius, radius-(-x), Color.BLACK);
-//			super.putPixel(-y+radius, radius-x, Color.BLACK);
-//			super.putPixel(-x+radius, radius-y, Color.BLACK);
-//			
-//			
-//			
-//			if(p<0) p=p+(2*x+3);
-//			else{
-//				p=p+2*(x-y)+5;
-//				y--;
-//			}
-//			x++;
-//			
-//		}
+
  		midPointDTron(tam.x, tam.y, r);
- 		midPointEclip(tam.x, tam.y, r, r1);
+ 		midPointEclipNetDut(tam.x, tam.y, r, r1);
 		JPanel panelDraw = new JPanel(){
 			/**
 			 * 

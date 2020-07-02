@@ -81,28 +81,42 @@ public class Main extends JFrame implements Runnable{
 				e1.printStackTrace();
 			}
 			if(this.hinh == 1) {
-				
-				Point tam = new Point();
-				tam = O;
-				
-				Point H, M;
-				
-				H = new Point();
-				H.x = tam.x - 15;
-				H.y = tam.y - 3;
-				
-				M = new Point();
-				Point tr = new Point();
-		 		tr.x = 10;
-		 		tr.y = 0;
-		 		double deg = 0.1;
+		
 				Transformations tf = new Transformations();
-				be.ve2D1(tam, H, M);
-				while(deg <= 1) {
+				Point Left = new Point(175, 120);
+				Point Right = new Point(245, 120);
+				Point tamTh = new Point(210, 120);
+				
+				
+				Point tam = new Point(60, 15);
+				int r = 8;
+				Point tammay = new Point(30, 20);
+				int r1 = 26, r2 = 3;
+				be.object2D2(tamTh, Left, Right, tam, r, tammay, r1, r2);
+				Point x, y, z, o, p;
+				x = new Point();
+				y = new Point();
+				z = new Point();
+				o = new Point();
+				p = new Point();
+				
+				Point tr = new Point(-1, 0);
+				Point tr1 = new Point(0, -1);
+				Point tr2 = new Point(1, 0);
+				Param.pnlGrid.repaint();
+				while(tr.x >= -200) {
 					try {
-						be.ve2D1(tam, H, M);
-						H = tf.quay2(tam, deg);
-						deg += 0.1;
+						x = tf.tinhTien(Left, tr);
+						y = tf.tinhTien(Right, tr);
+						z = tf.tinhTien(tamTh, tr);
+						o = tf.tinhTien(tam, tr1);
+						p = tf.tinhTien(tammay, tr2);
+						be.object2D2(z, x, y, tam, r, p, r1, r2);
+						tr.x -= 1;
+						//tinh tien may
+						if(z.x % 10 == 0) {
+							tr2.x += 1;
+						}
 						Thread.sleep(100);
 						be.setMaTranPixel(Param.maxX, Param.maxY);
 						Param.pnlGrid.repaint();
@@ -121,24 +135,30 @@ public class Main extends JFrame implements Runnable{
 				int r = 6;
 				Point tammay = new Point(30, 20);
 				int r1 = 6;
-				Point x, y, z, o;
+				Point x, y, z, o, p;
 				x = new Point();
 				y = new Point();
 				z = new Point();
 				o = new Point();
+				p = new Point();
+				
 				be.object2D(dinh, A, B, tam, r, tammay, r1);
 				Point tr = new Point(1, 0);
 				Point tr1 = new Point(0, -1);
+				Point tr2 = new Point(1, 0);
 				while(tr.x <= 250) {
 					try {
-						
+						// tinh tien may bay
 						x = tf.tinhTien(A, tr);
 						y = tf.tinhTien(B, tr);
 						z = tf.tinhTien(dinh, tr);
 						o = tf.tinhTien(tam, tr1);
-						be.object2D(z, x, y, o, r, tammay, r1);
+						p = tf.tinhTien(tammay, tr2);
+						be.object2D(z, x, y, o, r, p, r1);
 						tr.x += 2;
 						tr1.y -= 1;
+						//-------------------------
+						// vien dan thu nho dan
 						if(o.y == 70) {
 							r -= 2;
 							
@@ -151,10 +171,12 @@ public class Main extends JFrame implements Runnable{
 							r = 0;
 							
 						}
-//						if(z.x >= 120 && o.y <= 50) {
-//							
-//							be.del();
-//						}
+						//------------------
+						//tinh tien may
+						if(z.x % 20 == 0) {
+							tr2.x += 1;
+						}
+						//----------------
 						Thread.sleep(100);
 						be.setMaTranPixel(Param.maxX, Param.maxY);
 						Param.pnlGrid.repaint();
@@ -168,6 +190,7 @@ public class Main extends JFrame implements Runnable{
 			}
 			else if(this.hinh == 3) {
 				Point tam = new Point();
+				
 				if(Param.tamO.x >= 0 && Param.tamO.y >= 0) {
 					tam.x = Param.tamO.x;
 					tam.y = Param.tamO.y;
@@ -383,9 +406,9 @@ public class Main extends JFrame implements Runnable{
 						Param.btnCls.setBackground(Color.WHITE);
 						
 						hc.processTXT();
-						System.out.println(Param.tamO.x);
-						System.out.println(Param.tamO.y);
-						System.out.println(Param.R);
+//						System.out.println(Param.tamO.x);
+//						System.out.println(Param.tamO.y);
+//						System.out.println(Param.R);
 					}
 				});
 				
