@@ -114,23 +114,47 @@ public class Main extends JFrame implements Runnable{
 			}
 			else if(this.hinh == 2) {
 				Transformations tf = new Transformations();
-				Point A = new Point(130, 20);
-				Point B = new Point(165, 20);
-				Point dinh = new Point(135, 20);
-				Point x,y,z;
+				Point A = new Point(10, 20);
+				Point B = new Point(35, 20);
+				Point dinh = new Point(15, 20);
+				Point tam = new Point(140, 103);
+				int r = 6;
+				Point tammay = new Point(30, 20);
+				int r1 = 6;
+				Point x, y, z, o;
 				x = new Point();
 				y = new Point();
 				z = new Point();
-				be.object2D(dinh, A, B);
+				o = new Point();
+				be.object2D(dinh, A, B, tam, r, tammay, r1);
 				Point tr = new Point(1, 0);
-				while(tr.x <= 50) {
+				Point tr1 = new Point(0, -1);
+				while(tr.x <= 250) {
 					try {
 						
 						x = tf.tinhTien(A, tr);
 						y = tf.tinhTien(B, tr);
 						z = tf.tinhTien(dinh, tr);
-						be.object2D(z, x, y);
-						tr.x += 1;
+						o = tf.tinhTien(tam, tr1);
+						be.object2D(z, x, y, o, r, tammay, r1);
+						tr.x += 2;
+						tr1.y -= 1;
+						if(o.y == 70) {
+							r -= 2;
+							
+						}
+						if(o.y == 60) {
+							r -= 2;
+							
+						}
+						if(o.y == 50) {
+							r = 0;
+							
+						}
+//						if(z.x >= 120 && o.y <= 50) {
+//							
+//							be.del();
+//						}
 						Thread.sleep(100);
 						be.setMaTranPixel(Param.maxX, Param.maxY);
 						Param.pnlGrid.repaint();
@@ -214,6 +238,9 @@ public class Main extends JFrame implements Runnable{
 				btnClearactionPerformed(e);
 			}
 		});
+		btnClear.setBackground(Color.RED);
+		btnClear.setForeground(Color.WHITE);
+		btnClear.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnClear.setBounds(1605, 13, 97, 25);
 		Param.contentPane.add(btnClear);
 		
@@ -248,13 +275,22 @@ public class Main extends JFrame implements Runnable{
 					btnDrawactionPerformed(e);
 			}
 		});
+		btnDraw.setBackground(Color.DARK_GRAY);
+		btnDraw.setForeground(Color.WHITE);
+		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnDraw.setBounds(1496, 13, 97, 25);
 		Param.contentPane.add(btnDraw);
 		
 		r2D = new JRadioButton("Vẽ 2D");
 		r3D = new JRadioButton("Vẽ 3D");
-		r2D.setBounds(12, 17, 80, 22);
-		r3D.setBounds(12, 47, 80, 22);
+		r2D.setBounds(12, 14, 80, 22);
+		r3D.setBounds(12, 44, 80, 22);
+		r2D.setBackground(Color.DARK_GRAY);
+		r2D.setForeground(Color.WHITE);
+		r2D.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		r3D.setBackground(Color.DARK_GRAY);
+		r3D.setForeground(Color.WHITE);
+		r3D.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		bg = new ButtonGroup();
 		bg.add(r2D);

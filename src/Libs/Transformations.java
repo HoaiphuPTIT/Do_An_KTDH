@@ -45,6 +45,20 @@ public class Transformations {
 		return B;
 	}
 	
+	public Point tyLe(Point A, Point tr) {
+		int[][] defMatrix = {{A.x, A.y, 1}};
+		
+		Point C = new Point();
+		
+		MatrixTransform mt = new MatrixTransform();
+		defMatrix = mt.ratioMatrix(defMatrix, tr);
+		
+		C.x = defMatrix[0][0];
+		C.y = defMatrix[0][1];
+		
+		return C;
+	}
+	
 	public Point doiXung(Point E, Point M, int type) {
 		Point _M = new Point();
 		if(type == 0) {
