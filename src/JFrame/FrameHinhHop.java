@@ -9,18 +9,18 @@ import javax.swing.JTextField;
 
 import Libs.Param;
 
-public class FrameHinhCau extends JFrame{
-	public static int subFrameWidth=275,subFrameHight=250,xOBegin=10,yOBegin=25,khoangCach=100,labelSize=25,textSize=75;
+public class FrameHinhHop extends JFrame{
+	public static int subFrameWidth=400,subFrameHight=250,xOBegin=10,yOBegin=25,khoangCach=100,labelSize=25,textSize=75;
 	
 	public JFrame create() {
-		JFrame frame = new JFrame("HINH CAU");
+		JFrame frame = new JFrame("HINH HOP");
 		frame.setSize(subFrameWidth, subFrameHight);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setLayout(null);
 		
 		
-		JLabel labelX1,labelY1,labelZ1,labelBanKinhR;
+		JLabel labelX1,labelY1,labelZ1,labelH;
 		
 		labelX1=new JLabel("X1");
 		labelX1.setBounds(10,25,labelSize,25);
@@ -37,20 +37,20 @@ public class FrameHinhCau extends JFrame{
 		frame.add(Param.txtY1);
 		
 		labelZ1=new JLabel("Z1");
-		labelZ1.setBounds(10,75,labelSize,25);
+		labelZ1.setBounds(245, 25, labelSize, 25);
 		frame.add(labelZ1);
 		Param.txtZ1=new JTextField();
-		Param.txtZ1.setBounds(40,75,textSize,25);
+		Param.txtZ1.setBounds(270,25,textSize,25);
 		frame.add(Param.txtZ1);
 		
-		labelBanKinhR=new JLabel("R");
-		labelBanKinhR.setBounds(10,125,labelSize,25);
-		frame.add(labelBanKinhR);
-		Param.txtR=new JTextField();
-		Param.txtR.setBounds(40,125,textSize,25);
-		frame.add(Param.txtR);
+                labelH=new JLabel("H");
+		labelH.setBounds(10,75,labelSize,25);
+		frame.add(labelH);
+		Param.txtH=new JTextField();
+		Param.txtH.setBounds(40,75,textSize,25);
+		frame.add(Param.txtH);
 		
-		
+
 		Param.btnDraw=new JButton("DRAW");
 		Param.btnDraw.setFocusPainted(false);     	// xoa duong vien tren button khi click
 		Param.btnDraw.setBackground(Color.white);	//background cho button
@@ -95,16 +95,15 @@ public class FrameHinhCau extends JFrame{
             			Param.tamO.z = 0;
             		}
             		else {
-            			Param.tamO.z = (int) Math.abs(Integer.parseInt(text)/Math.sqrt(2) / 0.2 + 78);
+            			Param.tamO.z = (int) (70 + Math.abs(Integer.parseInt(text) / 0.2));
             		}
-            			
-            		text = Param.txtR.getText();
-            	if(text.equals("")){
-            		Param.txtR.requestFocus(); // nhay den de nhap tien gui
-                } else {
-                	Param.R = (int) (Integer.parseInt(text) / 0.2);
-                	
-                }
+            		text=Param.txtH.getText();
+                 	if(text.equals("")){
+                 		Param.txtH.requestFocus();
+                 	}
+                 	else{
+                 		Param.H = (int) (Integer.parseInt(text) / 0.2);
+                 	}
               }
             }
         }
@@ -113,14 +112,16 @@ public class FrameHinhCau extends JFrame{
 	public void clear(){
 		Param.tamO.x = -1;
 		Param.tamO.y = -1;
-		Param.tamO.z = -1;
-		Param.R = 0;
+        Param.tamO.z = -1;
+        Param.H = 0;
 		
 		Param.txtX1.setText("");
 		Param.txtX1.requestFocus();
 		Param.txtY1.setText("");
 		Param.txtZ1.setText("");
-		Param.txtR.setText("");
+                Param.txtH.setText("");
+
 		
 	}
 }
+
