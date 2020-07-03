@@ -78,16 +78,19 @@ public class CreateGrP {
          }
          
          // to lai mau duong bien
-//         for(int i = 0; i < w / size; i++){	// moi o pixel cach nhau = size
-//             for(int j = 0; j < h / size; j++){
-//                 if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.BLACK.getRGB()){	// xac dinh diem can put
-//                	 //this.maTranMau[i][j] = this.color.getRGB();
-//                	 g.setColor(Color.BLACK);
-//                     g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
-//                     g.setColor(Color.LIGHT_GRAY);
-//                 }
-//             }
-//         }
+         if(chon == 2) {
+        	 for(int i = 0; i < w / size; i++){	// moi o pixel cach nhau = size
+                 for(int j = 0; j < h / size; j++){
+                     if(maTranPixel[i][j] == true && this.maTranMau[i][j] == Color.BLACK.getRGB()){	// xac dinh diem can put
+                    	 //this.maTranMau[i][j] = this.color.getRGB();
+                    	 g.setColor(Color.BLACK);
+                         g.fillRect(i * size - 2, j * size - 2, 5, 5);	// put 1 diem tai toa do i, j co kich thuoc = 6 ---- i, j tru 3: lui diem can put vao giao giua 2 doan thang trong grid
+                         g.setColor(Color.LIGHT_GRAY);
+                     }
+                 }
+             }
+         }
+         
          g.setColor(Color.RED);
          if(chon == 1) {
         	 g.drawLine(w / 2 + 1, 0, w / 2 + 1, h);

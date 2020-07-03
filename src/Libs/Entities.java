@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import JFrame.FrameToaDo;
 import JFrame.Main;
 
 /**
@@ -696,7 +697,6 @@ public class Entities extends CreateGrP{
  		Point ULeft = new Point(tamTh.x - chRong_1, tamTh.y - chCao_1),
  	 		  DRight = new Point(tamTh.x + chRong_1, tamTh.y);
  		hcnDDA(ULeft.x, ULeft.y, DRight.x, DRight.y);
- 		
  	 	// ve canh buom
  		Point _tam = new Point(tamTh.x, tamTh.y - chCao_2*4);
  		
@@ -751,26 +751,35 @@ public class Entities extends CreateGrP{
  		mayNho(tamMay, r1, r2);
  		matTroi(tam, r);
  	}
+ 	
+ 	// ve cac doi tuong 3D
+ 	// ve hinh cau
  	public void hinhCau(Point tam, int r) {
  		int r1 = r / 4;
-
+ 		
  		midPointDTron(tam.x, tam.y, r);
  		midPointEclipNetDut(tam.x, tam.y, r, r1);
-		JPanel panelDraw = new JPanel(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected void paintComponent(Graphics g) {
-				// TODO Auto-generated method stub
-				super.paintComponent(g);
-				drawPixel(g, Param.pnlGrid.getWidth(), Param.pnlGrid.getHeight(), 1);
-			}
-			
-		};
-		Param.pnlGrid.repaint();
-		
+	
  	}
+ 	
+ 	// ve hinh tru
+ 	public void hinhTru() {
+ 		
+ 	}
+ 	
+ // ve hinh non
+  	public void hinhNon(Point tamO, Point dinh, int R) {
+  		
+  		// ve eclip day
+  		int r1 = R / 4;
+  		midPointEclipNetDut(tamO.x, tamO.y, R, r1);
+  		
+  		Point up, down;
+  		up = new Point(dinh.x, dinh.y);
+  		down = new Point(dinh.x + R, tamO.y);
+  		
+  		// ve 2 canh hinh non
+  		dtDDA(up.x, up.y, down.x - 3, down.y);
+  		dtDDA(up.x, up.y, down.x - R*2 + 3, down.y);
+  	}
 }
