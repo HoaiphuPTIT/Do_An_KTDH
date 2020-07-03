@@ -15,6 +15,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,6 +39,14 @@ public class Main extends JFrame implements Runnable{
 	//public JPanel contentPane;
 	//public JPanel pnlGrid;
 	private JLabel lblToado;
+	private JLabel lblToadoP;
+	
+	private JLabel lblX1;
+	private JLabel lblX2;
+	private JLabel lblY1;
+	private JLabel lblY2;
+	private JLabel lblO;
+	
 	private JComboBox<String> cmb2D;
 	private JComboBox<String> cmb3D;
 	private JRadioButton r2D;
@@ -80,6 +90,7 @@ public class Main extends JFrame implements Runnable{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			// chuyen dong 2D1
 			if(this.hinh == 1) {
 		
 				Transformations tf = new Transformations();
@@ -129,6 +140,7 @@ public class Main extends JFrame implements Runnable{
 					}
 				}
 			}
+			// chuyen dong 2D2
 			else if(this.hinh == 2) {
 				Transformations tf = new Transformations();
 				Point A = new Point(10, 20);
@@ -193,6 +205,7 @@ public class Main extends JFrame implements Runnable{
 				
 				Param.pnlGrid.repaint();
 			}
+			// ve hinh cau
 			else if(this.hinh == 3) {
 				Point tam = new Point();
 				
@@ -210,6 +223,7 @@ public class Main extends JFrame implements Runnable{
 				}
 				Param.pnlGrid.repaint();
 			}
+			// ve hinh non
 			else if(this.hinh == 4) {
 				Point tam, dinh;
 				tam = new Point();
@@ -232,6 +246,78 @@ public class Main extends JFrame implements Runnable{
 				
 				Param.pnlGrid.repaint();
 			}
+			else if(this.hinh == 5) {
+				Point tam = new Point();
+                int h = 0;
+                if(Param.tamO.x >= 0 && Param.tamO.y >= 0 && Param.tamO.z >= 0) {
+		
+					if(Param.tamO.z >= 78) {
+						tam.x = Param.tamO.x - (Param.tamO.z / 4);
+						tam.y = Param.tamO.y + (Param.tamO.z / 4);
+					}
+					else if(Param.tamO.z < 78) {
+						tam.x = Param.tamO.x + (Param.tamO.z / 4);
+						tam.y = Param.tamO.y - (Param.tamO.z / 4);
+			                                    
+					}
+					be.hinhTru(tam, Param.H, Param.R);            
+                }
+                Param.pnlGrid.repaint();
+			}
+			else if(this.hinh == 6) {
+				Point start = new Point();
+                int h = 0;
+                if(Param.tamO.x >= 0 && Param.tamO.y >= 0 && Param.tamO.z >= 0) {
+                	start.x = Param.tamO.x;
+                	start.y = Param.tamO.y;
+                	start.z = Param.tamO.z;
+//					if(Param.tamO.z >= 78) {
+//						start.x = Param.tamO.x - (Param.tamO.z / 4);
+//						start.y = Param.tamO.y + (Param.tamO.z / 4);
+//					}
+//					else if(Param.tamO.z < 78) {
+//						start.x = Param.tamO.x + (Param.tamO.z / 4);
+//						start.y = Param.tamO.y - (Param.tamO.z / 4);                    
+//					}
+                    be.hinhHop(start.x, start.y, start.z, Param.H);            
+                }
+                  
+                Param.pnlGrid.repaint();
+			}
+			else if(this.hinh == 7) {
+				Point tam = new Point(140, 70);
+				Point diem = new Point (140, 30);
+				Transformations tf = new Transformations();
+				Point tr = new Point(0, 40);
+				Point tr2 = new Point(0, -40);
+				int a = 0;
+				double deg = -0.1;
+				Point t = new Point(40, 30);
+				be.quay(tam, diem);
+				while(a <= 100) {
+					try {
+						tr.x = tam.x - diem.x;
+						tr.y = tam.y - diem.y;
+						diem = tf.tinhTien(diem, tr);
+						diem = tf.quay2(tam, deg);
+						tr2.x =  - diem.x;
+						tr2.y =  - diem.y;
+						diem = tf.tinhTien(tam, tr);
+						be.quay(tam, diem);
+						deg -= 0.1;
+						a++;
+						Thread.sleep(1000);
+						be.setMaTranPixel(Param.maxX, Param.maxY);
+						Param.pnlGrid.repaint();
+						if(this.hinh == 0) break;
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			// xoa 
 			else if(this.hinh == 0) {
 				Param.tamO.x = -1;
 				Param.tamO.y = -1;
@@ -253,10 +339,24 @@ public class Main extends JFrame implements Runnable{
 		setBounds(100, 25, 1720, 1020);
 		setResizable(false);
 		Param.contentPane = new JPanel();
+		Param.contentPane.setBackground(Color.WHITE);
 		Param.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Param.contentPane);
 		Param.contentPane.setLayout(null);
-		
+		Param.contentPane.addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				//lblToadoP.setText("X: " + e.getX() + ", Y: " + e.getY());
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		Param.pnlGrid = new JPanel() {
 			/**
 			 * 
@@ -280,15 +380,38 @@ public class Main extends JFrame implements Runnable{
 				pnlGridmouseMoved(e);
 			}
 		});
+		
 		Param.pnlGrid.setBounds(12, 75, 1678, 854);
 		Param.pnlGrid.setBackground(Color.WHITE);
+//		lblO = new JLabel("O");
+//		lblO.setBounds(839, 427, 180, 16);
+//		Param.pnlGrid.add(lblO);
+		
 		Param.contentPane.add(Param.pnlGrid);
 		
 		lblToado = new JLabel("Tọa độ chuột");
 		lblToado.setBounds(12, 942, 180, 16);
 		Param.contentPane.add(lblToado);
 		
-		JButton btnClear = new JButton("Clear");
+//		lblToadoP = new JLabel("Tọa độ Pannel");
+//		lblToadoP.setBounds(112, 942, 180, 16);
+//		Param.contentPane.add(lblToadoP);
+		
+		lblY1 = new JLabel("14");
+		lblY1.setBounds(845, 52, 180, 16);
+		Param.contentPane.add(lblY1);
+		lblY2 = new JLabel("-14");
+		lblY2.setBounds(845, 932, 180, 16);
+		Param.contentPane.add(lblY2);
+		lblX1 = new JLabel("28");
+		lblX1.setBounds(1695, 485, 180, 16);
+		Param.contentPane.add(lblX1);
+		lblX2 = new JLabel("-28");
+		lblX2.setBounds(0, 485, 180, 16);
+		Param.contentPane.add(lblX2);
+		
+		
+		JButton btnClear = new JButton("Xóa");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnClearactionPerformed(e);
@@ -300,10 +423,24 @@ public class Main extends JFrame implements Runnable{
 		btnClear.setBounds(1605, 13, 97, 25);
 		Param.contentPane.add(btnClear);
 		
+		JButton btnInfo = new JButton("Thông tin nhóm");
+		btnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrameInfo fr = new FrameInfo();
+				fr.setVisible(true);
+			}
+		});
+		btnInfo.setBackground(Color.RED);
+		btnInfo.setForeground(Color.WHITE);
+		btnInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnInfo.setBounds(1555, 932, 150, 25);
+		Param.contentPane.add(btnInfo);
+		
 
 		DefaultComboBoxModel<String> type1 = new DefaultComboBoxModel<String>();
 		type1.addElement("Chuyển động 2D 1");
 		type1.addElement("Chuyển động 2D 2");
+		
 		cmb2D = new JComboBox<String>(type1);
 		cmb2D.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		cmb2D.setForeground(Color.WHITE);
@@ -316,6 +453,9 @@ public class Main extends JFrame implements Runnable{
 		DefaultComboBoxModel<String> type2 = new DefaultComboBoxModel<String>();
 		type2.addElement("Hình cầu");
 		type2.addElement("Hình nón");
+		type2.addElement("Hình trụ");
+		type2.addElement("Hình hộp chữ nhật");
+		type2.addElement("Test");
 		cmb3D = new JComboBox<String>(type2);
 		cmb3D.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		cmb3D.setForeground(Color.WHITE);
@@ -419,15 +559,16 @@ public class Main extends JFrame implements Runnable{
 	protected void pnlGridmouseClicked(MouseEvent e) {
 			
 			
-			if(r2D.isSelected() && cmb2D.getSelectedIndex() == 0) {
+//			if(r2D.isSelected() && cmb2D.getSelectedIndex() == 0) {
+////				
+//				this.hinh = 1;
+//			}
+//			else if(r2D.isSelected() && cmb2D.getSelectedIndex() == 1) {
 //				
-				this.hinh = 1;
-			}
-			else if(r2D.isSelected() && cmb2D.getSelectedIndex() == 1) {
-				
-				this.hinh = 2;
-			}
-			else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 0) {
+//				this.hinh = 2;
+//			}
+			// hien form ve hinh cau
+			if(r3D.isSelected() && cmb3D.getSelectedIndex() == 0) {
 				FrameHinhCau hc = new FrameHinhCau();
 				Param.createFrame3D = hc.create();
 				
@@ -458,6 +599,7 @@ public class Main extends JFrame implements Runnable{
 				});
 				this.hinh = 3;
 			}
+			// hien form ve hinh non
 			else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 1) {
 				FrameHinhNon hn = new FrameHinhNon();
 				Param.createFrame3D = hn.create();
@@ -489,6 +631,71 @@ public class Main extends JFrame implements Runnable{
 				});
 				this.hinh = 4;
 			}
+			// hien form ve hinh tru
+			else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 2) {
+				FrameHinhTru ht = new FrameHinhTru();
+				Param.createFrame3D = ht.create();
+				
+				Param.btnDraw.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Param.btnDraw.setBackground(Color.GRAY);
+						Param.btnCls.setBackground(Color.WHITE);
+						
+						ht.processTXT();
+//						System.out.println(Param.tamO.x);
+//						System.out.println(Param.tamO.y);
+//						System.out.println(Param.R);
+					}
+				});
+				
+				Param.btnCls.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						Param.btnDraw.setBackground(Color.WHITE);
+						Param.btnCls.setBackground(Color.GRAY);
+						ht.clear();
+						be.setMaTranPixel(Param.maxX, Param.maxY);
+						Param.pnlGrid.repaint();
+					}
+				});
+				this.hinh = 5;
+			}
+			// hien form ve hinh hop chu nhat
+			else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 3) {
+				
+				FrameHinhHop hh = new FrameHinhHop();
+				Param.createFrame3D = hh.create();
+				
+				Param.btnDraw.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Param.btnDraw.setBackground(Color.GRAY);
+						Param.btnCls.setBackground(Color.WHITE);
+						
+						hh.processTXT();
+//						System.out.println(Param.tamO.x);
+//						System.out.println(Param.tamO.y);
+//						System.out.println(Param.R);
+					}
+				});
+				
+				Param.btnCls.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						Param.btnDraw.setBackground(Color.WHITE);
+						Param.btnCls.setBackground(Color.GRAY);
+						hh.clear();
+						be.setMaTranPixel(Param.maxX, Param.maxY);
+						Param.pnlGrid.repaint();
+					}
+				});
+				this.hinh = 6;
+			}
 	}
 	
 	protected void btnClearactionPerformed(ActionEvent e) {
@@ -518,6 +725,14 @@ public class Main extends JFrame implements Runnable{
 		else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 1) {
 			
 			this.hinh = 4;
+		}
+		else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 2) {
+			
+			this.hinh = 5;
+		}
+		else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 3) {
+			
+			this.hinh = 6;
 		}
 	}
 	

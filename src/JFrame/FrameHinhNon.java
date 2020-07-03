@@ -94,7 +94,7 @@ public class FrameHinhNon extends JFrame{
          	if(text.equals("")){
      			Param.txtY1.requestFocus(); // nhay den de nhap tien gui
              } else {
-            	 Param.tamO.y = (int) (Math.abs(Integer.parseInt(text) / 0.2 + 70));
+            	 Param.tamO.y = (int) (70 + Math.abs(Integer.parseInt(text) / 0.2));
              	
              	text=Param.txtZ1.getText();
              	if(text.equals("")){

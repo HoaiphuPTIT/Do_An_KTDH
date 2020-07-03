@@ -46,6 +46,7 @@ public class Entities extends CreateGrP{
  	  	put4Pixel(xc, yc, x, y);
  	    p = (int) Math.round(b2 - (a2 * B) + (0.25 * a2)); //p=b2 - a2*b +a2/4
  	    int t = 0;
+ 	    int edit = 3;
  	    while(fx < fy)
  	    {
  	    	t++;
@@ -61,7 +62,7 @@ public class Entities extends CreateGrP{
  	            p += b2*(2*x +3) + a2*(2- 2*y); //p=p +b2(2x +3) +a2(2-2y)
  	            fy -= 2*a2;
  	        }
- 	        if(t % 9 < 5) {
+ 	        if(t % 6 < edit) {
  	        	super.putPixel(xc+x, yc-y, Color.BLACK);
  	        	super.putPixel(xc-x, yc-y, Color.BLACK);
  	        }
@@ -85,7 +86,7 @@ public class Entities extends CreateGrP{
  	            fx += 2*b2;
  	            p += b2*(2*x +2) +a2*(3- 2*y); //p=p+ b2(2x +2) + a2(3-2y)
  	        }
- 	        if(t % 9 < 5) {
+ 	        if(t % 6 < edit) {
  	        	super.putPixel(xc+x, yc-y, Color.BLACK);
  	        	super.putPixel(xc-x, yc-y, Color.BLACK);
 	        }
@@ -745,6 +746,10 @@ public class Entities extends CreateGrP{
  		hcnDDA(0, 50, 278, 141);
  		super.toMauBien(5, 60, Color.BLUE);
  	}
+ 	// ve phep quay
+ 	public void quay(Point tam, Point diem) {
+ 		dtDDA(tam.x, tam.y, diem.x, diem.y);
+ 	}
  	public void object2D2(Point tamTh, Point Left, Point Right, Point tam, int r, Point tamMay, int r1, int r2) {
  		BGThuyen();
  		thuyen(tamTh, Left, Right);
@@ -763,8 +768,19 @@ public class Entities extends CreateGrP{
  	}
  	
  	// ve hinh tru
- 	public void hinhTru() {
- 		
+ 	public void hinhTru(Point tamO, int h , int R) {
+ 	// ve eclip 2 day
+  		int r1 = R / 3;
+  		midPointEclip(tamO.x, tamO.y, R, r1); // đáy trên 
+  		midPointEclipNetDut(tamO.x , tamO.y +h , R, r1);
+                
+  		Point left, right;
+  		left = new Point(tamO.x - R +1 , tamO.y); // điểm trái ngang tâm O
+  		right = new Point(tamO.x +R -1 , tamO.y); // điểm phải ngang tâm O
+  		
+  		// ve 2 canh hinh trụ
+  		dtDDA(left.x, left.y, left.x , left.y + h);
+  		dtDDA(right.x, right.y, right.x , right.y + h);
  	}
  	
  // ve hinh non
@@ -782,4 +798,73 @@ public class Entities extends CreateGrP{
   		dtDDA(up.x, up.y, down.x - 3, down.y);
   		dtDDA(up.x, up.y, down.x - R*2 + 3, down.y);
   	}
+  	// ve hinh hop
+  	public void hinhHop(int x, int y, int z, int kc){
+        int []a = {x, y, z};
+        int rong = kc/2;
+        int []b = new int[3];
+        int []c = new int[3];
+        int []d = new int[3];
+        int []e = new int[3];
+        int []f = new int[3];
+        int []g = new int[3];
+        int []h = new int[3];
+        
+        b[0]=a[0]+kc;
+        b[1]=a[1];
+        b[2]=a[2];
+     
+        c[0]=a[0]+kc;
+        c[1]=a[1];
+        c[2]=a[2]+kc;
+  
+        d[0]=a[0];
+        d[1]=a[1];
+        d[2]=a[2]+kc;
+
+        e[0]=a[0];
+        e[1]=a[1]+rong;
+        e[2]=a[2];
+
+        f[0]=b[0];
+        f[1]=e[1];
+        f[2]=b[2];
+ 
+        g[0]=c[0];
+        g[1]=c[1]+rong;
+        g[2]=c[2];
+
+        h[0]=d[0];
+        h[1]=d[1]+rong;
+        h[2]=d[2];
+
+        int []a1 = to2D(a[0], a[1], a[2]);
+        int []b1 = to2D(b[0], b[1], b[2]);     
+        int []c1 = to2D(c[0], c[1], c[2]);
+        int []d1 = to2D(d[0], d[1], d[2]);
+        int []e1 = to2D(e[0], e[1], e[2]);
+        int []f1 = to2D(f[0], f[1], f[2]);
+        int []g1 = to2D(g[0], g[1], g[2]);
+        int []h1 = to2D(h[0], h[1], h[2]);
+
+         dtDDA(e1[0], e1[1], f1[0], f1[1]);
+         dtDDA(g1[0], g1[1], f1[0], f1[1]);
+         dtDDA(g1[0], g1[1], h1[0], h1[1]);
+         dtDDA(e1[0], e1[1], h1[0], h1[1]);
+         dtDDA(h1[0], h1[1], d1[0], d1[1]);
+         dtDDA(d1[0], d1[1], c1[0], c1[1]);
+         dtDDA(g1[0], g1[1], c1[0], c1[1]);
+         dtDDA(b1[0], b1[1], c1[0], c1[1]);
+         dtDDA(b1[0], b1[1], f1[0], f1[1]);
+         
+         netDutDDA(a1[0], a1[1], d1[0], d1[1]);
+         netDutDDA(e1[0], e1[1], a1[0], a1[1]);
+         netDutDDA(b1[0], b1[1], a1[0], a1[1]);
+    }
+    public int[] to2D(int x, int y, int z){
+        int []result = new int[2];
+        result[0] = (int)Math.round(x - y*((Math.sqrt(2)/2)));
+        result[1] = (int)Math.round(z - y*((Math.sqrt(2)/2)));
+        return result;
+    }
 }
