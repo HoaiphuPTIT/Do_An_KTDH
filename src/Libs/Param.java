@@ -33,6 +33,10 @@ public class Param {
 	public static JLabel lblZ1;
 	public static JLabel lblZ2;
 	
+	public static JLabel lblA = new JLabel();
+	public static JLabel lblB = new JLabel();
+	public static JLabel lblC = new JLabel();
+	public static JLabel lblD = new JLabel();
 	//public static int subFrameWidth=275,subFrameHight=250,xOBegin=10,yOBegin=25,khoangCach=100,labelSize=25,textSize=75;
 	
 	public static int size = 6;

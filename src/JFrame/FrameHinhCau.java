@@ -95,7 +95,7 @@ public class FrameHinhCau extends JFrame{
             			Param.tamO.z = 0;
             		}
             		else {
-            			Param.tamO.z = (int) Math.abs(Integer.parseInt(text)/Math.sqrt(2) / 0.2 + 78);
+            			Param.tamO.z = (int) (70 + Math.abs(Integer.parseInt(text) / 0.2));
             		}
             			
             		text = Param.txtR.getText();

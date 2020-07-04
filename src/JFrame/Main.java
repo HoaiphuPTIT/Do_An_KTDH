@@ -1,5 +1,5 @@
 package JFrame;
-import Libs.Entities;
+import Libs.Objects;
 import Libs.CreateGrP;
 import Libs.Point;
 import Libs.Transformations;
@@ -62,7 +62,7 @@ public class Main extends JFrame implements Runnable{
 	int hinh = 0;
     private CreateGrP lib;
 	private Point O;
-	private Entities be;
+	private Objects be;
 	/**
 	 * Launch the application.
 	 */
@@ -272,8 +272,8 @@ public class Main extends JFrame implements Runnable{
 			}
 			else if(this.hinh == 6) {
 				Point start = new Point();
-                int h = 0;
-                if(Param.tamO.x >= 0 && Param.tamO.y >= 0 && Param.tamO.z >= 0) {
+                int h = 10;
+                //if(Param.tamO.x >= 0 && Param.tamO.y >= 0 && Param.tamO.z >= 0) {
                 	start.x = Param.tamO.x;
                 	start.y = Param.tamO.y;
                 	start.z = Param.tamO.z;
@@ -286,8 +286,8 @@ public class Main extends JFrame implements Runnable{
 //						start.y = Param.tamO.y - (Param.tamO.z / 4);                    
 //					}
                     be.hinhHop(start.x, start.y, start.z, Param.H);            
-                }
-                  
+                //}
+//                be.hinhHop(140, 10, 70, h);
                 Param.pnlGrid.repaint();
 			}
 			else if(this.hinh == 7) {
@@ -460,7 +460,7 @@ public class Main extends JFrame implements Runnable{
 		type2.addElement("Hình cầu");
 		type2.addElement("Hình nón");
 		type2.addElement("Hình trụ");
-		type2.addElement("Hình hộp chữ nhật");
+		type2.addElement("Hình lập phương");
 		type2.addElement("Test");
 		cmb3D = new JComboBox<String>(type2);
 		cmb3D.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -756,7 +756,7 @@ public class Main extends JFrame implements Runnable{
         //System.out.println(pnlGrid.getWidth() + " -> " + maxX + " / 2 -> " + maxX / 2);
         //System.out.println(pnlGrid.getHeight() + " -> " + maxY + " / 2 -> " + maxY / 2);
         
-        be = new Entities(Param.maxX, Param.maxY);
+        be = new Objects(Param.maxX, Param.maxY);
         be.setMaTranPixel(Param.maxX, Param.maxY);
         O = new Point();
         O.x = Param.maxX / 2 + 1; // 140 
