@@ -204,5 +204,8 @@ public class CreateGrP {
 		
 	 }
 
-
+	 public Point chuyenTD2D(Point diem) {
+		 //diem.x = (float)(diem.x * 0.2 - 28);
+		 return diem;
+	 }
 }
