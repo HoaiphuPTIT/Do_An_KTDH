@@ -99,7 +99,7 @@ public class CreateGrP {
          else if(chon == 2) {
         	 g.drawLine(w / 2 + 1, 0, w / 2 + 1, h / 2 - 7);
         	 g.drawLine(w / 2 + 1, h / 2 - 7, w, h / 2 - 7);
-        	 g.drawLine(0, h, w / 2 + 1, h / 2 - 7);
+        	 g.drawLine(410, h, w / 2 + 1, h / 2 - 7);
          }
          
          

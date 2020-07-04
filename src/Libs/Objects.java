@@ -20,9 +20,9 @@ import JFrame.Main;
  * @author HoaiphuLam
  *
  */
-public class Entities extends CreateGrP{
+public class Objects extends CreateGrP{
 	
-	public Entities(int maxX, int maxY) {
+	public Objects(int maxX, int maxY) {
 		super(maxX, maxY);
 		// TODO Auto-generated constructor stub
 	}
@@ -807,7 +807,7 @@ public class Entities extends CreateGrP{
  	// ve cac doi tuong 3D
  	// ve hinh cau
  	public void hinhCau(Point tam, int r) {
- 		int r1 = r / 4;
+ 		int r1 = r / 3;
  		
  		midPointDTron(tam.x, tam.y, r);
  		midPointEclipNetDut(tam.x, tam.y, r, r1);
@@ -834,7 +834,7 @@ public class Entities extends CreateGrP{
   	public void hinhNon(Point tamO, Point dinh, int R) {
   		
   		// ve eclip day
-  		int r1 = R / 4;
+  		int r1 = R / 3;
   		midPointEclipNetDut(tamO.x, tamO.y, R, r1);
   		
   		Point up, down;
@@ -842,76 +842,89 @@ public class Entities extends CreateGrP{
   		down = new Point(dinh.x + R, tamO.y);
   		
   		// ve 2 canh hinh non
-  		dtDDA(up.x, up.y, down.x - 3, down.y);
-  		dtDDA(up.x, up.y, down.x - R*2 + 3, down.y);
+  		dtDDA(up.x, up.y, down.x - 1, down.y);
+  		dtDDA(up.x, up.y, down.x - R*2 + 1, down.y);
   	}
   	// ve hinh hop
   	public void hinhHop(int x, int y, int z, int kc){
-        int []a = {x, y, z};
-        int rong = kc/2;
-        int []b = new int[3];
-        int []c = new int[3];
-        int []d = new int[3];
-        int []e = new int[3];
-        int []f = new int[3];
-        int []g = new int[3];
-        int []h = new int[3];
-        
-        b[0]=a[0]+kc;
-        b[1]=a[1];
-        b[2]=a[2];
-     
-        c[0]=a[0]+kc;
-        c[1]=a[1];
-        c[2]=a[2]+kc;
-  
-        d[0]=a[0];
-        d[1]=a[1];
-        d[2]=a[2]+kc;
+  		int []a = {x, y, z};
+//      int rong = kc/2;
+      int []b = new int[3];
+      int []c = new int[3];
+      int []d = new int[3];
+      int []e = new int[3];
+      int []f = new int[3];
+      int []g = new int[3];
+      int []h = new int[3];
+      
+      b[0]=a[0]+kc;
+      b[1]=a[1];
+      b[2]=a[2];
+   
+      c[0]=a[0]+kc;
+      c[1]=a[1]+kc;
+      c[2]=a[2];
 
-        e[0]=a[0];
-        e[1]=a[1]+rong;
-        e[2]=a[2];
+      d[0]=a[0];
+      d[1]=a[1]+kc;
+      d[2]=a[2];
 
-        f[0]=b[0];
-        f[1]=e[1];
-        f[2]=b[2];
- 
-        g[0]=c[0];
-        g[1]=c[1]+rong;
-        g[2]=c[2];
+      e[0]=a[0];
+      e[1]=a[1];//rong
+      e[2]=a[2]-kc;
 
-        h[0]=d[0];
-        h[1]=d[1]+rong;
-        h[2]=d[2];
+      f[0]=b[0];
+      f[1]=b[1];
+      f[2]=b[2]-kc;
 
-        int []a1 = to2D(a[0], a[1], a[2]);
-        int []b1 = to2D(b[0], b[1], b[2]);     
-        int []c1 = to2D(c[0], c[1], c[2]);
-        int []d1 = to2D(d[0], d[1], d[2]);
-        int []e1 = to2D(e[0], e[1], e[2]);
-        int []f1 = to2D(f[0], f[1], f[2]);
-        int []g1 = to2D(g[0], g[1], g[2]);
-        int []h1 = to2D(h[0], h[1], h[2]);
+      g[0]=c[0];
+      g[1]=c[1];//rong
+      g[2]=c[2]-kc;
 
-         dtDDA(e1[0], e1[1], f1[0], f1[1]);
-         dtDDA(g1[0], g1[1], f1[0], f1[1]);
-         dtDDA(g1[0], g1[1], h1[0], h1[1]);
-         dtDDA(e1[0], e1[1], h1[0], h1[1]);
-         dtDDA(h1[0], h1[1], d1[0], d1[1]);
-         dtDDA(d1[0], d1[1], c1[0], c1[1]);
-         dtDDA(g1[0], g1[1], c1[0], c1[1]);
-         dtDDA(b1[0], b1[1], c1[0], c1[1]);
-         dtDDA(b1[0], b1[1], f1[0], f1[1]);
-         
-         netDutDDA(a1[0], a1[1], d1[0], d1[1]);
-         netDutDDA(e1[0], e1[1], a1[0], a1[1]);
-         netDutDDA(b1[0], b1[1], a1[0], a1[1]);
+      h[0]=d[0];
+      h[1]=d[1]; //rong
+      h[2]=d[2]-kc;
+
+
+      int []a1 = to2D(a[0], a[1], a[2]);
+      int []b1 = to2D(b[0], b[1], b[2]);     
+      int []c1 = to2D(c[0], c[1], c[2]);
+      int []d1 = to2D(d[0], d[1], d[2]);
+      int []e1 = to2D(e[0], e[1], e[2]);
+      int []f1 = to2D(f[0], f[1], f[2]);
+      int []g1 = to2D(g[0], g[1], g[2]);
+      int []h1 = to2D(h[0], h[1], h[2]);
+      
+//      Param.lblA.setText("A(X: " + (a[0] *0.2-28) + ", Y: " + (14-a[1]*0.2) + ", Z: " + a[2]);
+//      Param.lblA.setBounds(a[0]*6, a[1]*6, 180, 16);
+//      Param.lblB.setText("B(X: " + (b[0] *0.2-28) + ", Y: " + (14-b[1]*0.2) + ", Z: " + b[2]);
+//      Param.lblB.setBounds(b[0]*6, b[1]*6, 180, 16);
+//      Param.lblC.setText("C(X: " + (c[0] *0.2-28) + ", Y: " + (14-c[1]*0.2) + ", Z: " + c[2]);
+//      Param.lblC.setBounds(c[0]*6, c[1]*6, 180, 16);
+//      Param.pnlGrid.add(Param.lblA);
+//      Param.pnlGrid.add(Param.lblB);
+//      Param.pnlGrid.add(Param.lblC);
+       //net liền 
+       dtDDA(e1[0], e1[1], f1[0], f1[1]);
+       dtDDA(c1[0], c1[1], g1[0], g1[1]);
+       
+       dtDDA(d1[0], d1[1], c1[0], c1[1]);
+       dtDDA(b1[0], b1[1], c1[0], c1[1]);
+       dtDDA(b1[0], b1[1], f1[0], f1[1]);
+       dtDDA(a1[0], a1[1], d1[0], d1[1]);
+       dtDDA(e1[0], e1[1], a1[0], a1[1]);
+       dtDDA(b1[0], b1[1], a1[0], a1[1]);
+       dtDDA(f1[0], f1[1], g1[0], g1[1]);
+       
+       //netDutDDA
+       netDutDDA(h1[0], h1[1], d1[0], d1[1]);
+       netDutDDA(h1[0], h1[1], e1[0], e1[1]);
+       netDutDDA(h1[0], h1[1], g1[0], g1[1]);
     }
     public int[] to2D(int x, int y, int z){
         int []result = new int[2];
-        result[0] = (int)Math.round(x - y*((Math.sqrt(2)/2)));
-        result[1] = (int)Math.round(z - y*((Math.sqrt(2)/2)));
+        result[0] = (int)Math.round(x - z*((Math.sqrt(2)/4)));
+        result[1] = (int)Math.round(y + z*((Math.sqrt(2)/4)));
         return result;
     }
 }
