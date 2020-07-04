@@ -59,16 +59,18 @@ public class Transformations {
 		return C;
 	}
 	
-	public Point doiXung(Point E, Point M, int type) {
+	public Point tyLe2(Point A, Point tr) {
+		A.x = tr.x * A.x;
+		A.y = tr.y * A.y;
+		return A;
+	}
+	
+	public Point doiXung(Point E, Point M) {
 		Point _M = new Point();
-		if(type == 0) {
+		
 			_M.x = 2 * E.x - M.x;
-			_M.y = 2 * E.x - M.y;
-		}
-		else if(type == 1) {
-			_M.x = 2 * E.y - M.x;
 			_M.y = 2 * E.y - M.y;
-		}
+		
 		return _M;
 	}
 }

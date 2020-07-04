@@ -211,14 +211,16 @@ public class Main extends JFrame implements Runnable{
 				
 				if(Param.tamO.x >= 0 && Param.tamO.y >= 0 && Param.tamO.z >= 0) {
 					
-					if(Param.tamO.z >= 78) {
-						tam.x = Param.tamO.x - (Param.tamO.z / 4);
-						tam.y = Param.tamO.y + (Param.tamO.z / 4);
-					}
-					else if(Param.tamO.z < 78) {
-						tam.x = Param.tamO.x + (Param.tamO.z / 4);
-						tam.y = Param.tamO.y - (Param.tamO.z / 4);
-					}
+//					if(Param.tamO.z >= 78) {
+//						tam.x = Param.tamO.x - (Param.tamO.z / 4);
+//						tam.y = Param.tamO.y + (Param.tamO.z / 4);
+//					}
+//					else if(Param.tamO.z < 78) {
+//						tam.x = Param.tamO.x + (Param.tamO.z / 4);
+//						tam.y = Param.tamO.y - (Param.tamO.z / 4);
+//					}
+					tam.x = Param.tamO.x;
+					tam.y = Param.tamO.y;
 					be.hinhCau(tam, Param.R);
 				}
 				Param.pnlGrid.repaint();
@@ -231,14 +233,16 @@ public class Main extends JFrame implements Runnable{
 				int R = 28;
 				if(Param.tamO.x >= 0 && Param.tamO.y >= 0 && Param.tamO.z >= 0) {
 					
-					if(Param.tamO.z >= 78) {
-						tam.x = Param.tamO.x - (Param.tamO.z / 4);
-						tam.y = Param.tamO.y + (Param.tamO.z / 4);
-					}
-					else if(Param.tamO.z < 78) {
-						tam.x = Param.tamO.x + (Param.tamO.z / 4);
-						tam.y = Param.tamO.y - (Param.tamO.z / 4);
-					}
+//					if(Param.tamO.z >= 78) {
+//						tam.x = Param.tamO.x - (Param.tamO.z / 4);
+//						tam.y = Param.tamO.y + (Param.tamO.z / 4);
+//					}
+//					else if(Param.tamO.z < 78) {
+//						tam.x = Param.tamO.x + (Param.tamO.z / 4);
+//						tam.y = Param.tamO.y - (Param.tamO.z / 4);
+//					}
+					tam.x = Param.tamO.x;
+					tam.y = Param.tamO.y;
 					dinh.x = tam.x;
 					dinh.y = tam.y - Param.H;
 					be.hinhNon(tam, dinh, Param.R);
@@ -251,15 +255,17 @@ public class Main extends JFrame implements Runnable{
                 int h = 0;
                 if(Param.tamO.x >= 0 && Param.tamO.y >= 0 && Param.tamO.z >= 0) {
 		
-					if(Param.tamO.z >= 78) {
-						tam.x = Param.tamO.x - (Param.tamO.z / 4);
-						tam.y = Param.tamO.y + (Param.tamO.z / 4);
-					}
-					else if(Param.tamO.z < 78) {
-						tam.x = Param.tamO.x + (Param.tamO.z / 4);
-						tam.y = Param.tamO.y - (Param.tamO.z / 4);
-			                                    
-					}
+//					if(Param.tamO.z >= 78) {
+//						tam.x = Param.tamO.x - (Param.tamO.z / 4);
+//						tam.y = Param.tamO.y + (Param.tamO.z / 4);
+//					}
+//					else if(Param.tamO.z < 78) {
+//						tam.x = Param.tamO.x + (Param.tamO.z / 4);
+//						tam.y = Param.tamO.y - (Param.tamO.z / 4);
+//			                                    
+//					}
+					tam.x = Param.tamO.x;
+					tam.y = Param.tamO.y;
 					be.hinhTru(tam, Param.H, Param.R);            
                 }
                 Param.pnlGrid.repaint();
@@ -541,18 +547,19 @@ public class Main extends JFrame implements Runnable{
 //		else if(mx / size > O.x && my / size > O.y) {
 //			lblToado.setText("x: " + (float)(x - M.x) + ", y: " + (float)(M.y - y));
 //		}
-		if(mx / Param.size <= O.x && my / Param.size <= O.y) {
-			lblToado.setText("x: " + (float)((mx / Param.size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / Param.size) * 0.2));
-		}
-		else if(mx / Param.size > O.x && my / Param.size <= O.y) {
-			lblToado.setText("x: " + (float)((mx / Param.size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / Param.size) * 0.2));
-		}
-		else if(mx / Param.size <= O.x && my / Param.size > O.y) {
-			lblToado.setText("x: " + (float)((mx / Param.size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / Param.size) * 0.2));
-		}
-		else if(mx / Param.size > O.x && my / Param.size > O.y) {
-			lblToado.setText("x: " + (float)((mx / Param.size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / Param.size) * 0.2));
-		}
+//		if(mx / Param.size <= O.x && my / Param.size <= O.y) {
+//			lblToado.setText("x: " + (float)((mx / Param.size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / Param.size) * 0.2));
+//		}
+//		else if(mx / Param.size > O.x && my / Param.size <= O.y) {
+//			lblToado.setText("x: " + (float)((mx / Param.size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / Param.size) * 0.2));
+//		}
+//		else if(mx / Param.size <= O.x && my / Param.size > O.y) {
+//			lblToado.setText("x: " + (float)((mx / Param.size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / Param.size) * 0.2));
+//		}
+//		else if(mx / Param.size > O.x && my / Param.size > O.y) {
+//			lblToado.setText("x: " + (float)((mx / Param.size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / Param.size) * 0.2));
+//		}
+		lblToado.setText("x: " + (float)((mx / Param.size) * 0.2 - M.x) + ", y: " + (float)(M.y - (my / Param.size) * 0.2));
 	}
 	
 	
@@ -711,11 +718,13 @@ public class Main extends JFrame implements Runnable{
 //			dinh = new Point(O.x, O.y - a);
 //			trai = new Point(O.x - b, O.y - b);
 //			phai = new Point(O.x + b, O.y - b);
-			
+			FrameToaDoThuyen fr = new FrameToaDoThuyen();
+			fr.setVisible(true);
 			this.hinh = 1;
 		}
 		else if(r2D.isSelected() && cmb2D.getSelectedIndex() == 1) {
-			
+			FrameToaDoMayBay fr = new FrameToaDoMayBay();
+			fr.setVisible(true);
 			this.hinh = 2;
 		}
 		else if(r3D.isSelected() && cmb3D.getSelectedIndex() == 0) {

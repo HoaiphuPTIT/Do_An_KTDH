@@ -12,7 +12,8 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import JFrame.FrameToaDo;
+import JFrame.FrameToaDoMayBay;
+import JFrame.FrameToaDoThuyen;
 import JFrame.Main;
 
 /**
@@ -374,7 +375,7 @@ public class Entities extends CreateGrP{
  	}
  	
  	// hinh tam giac
- 	public void tripleRec(Point dinh, int chRong, int chCao, int type) {
+ 	public void tamGiacThuong(Point dinh, int chRong, int chCao, int type) {
  		Point left, right;
  		
  		left = new Point();
@@ -401,11 +402,17 @@ public class Entities extends CreateGrP{
  	}
  	
  	// hinh tam giac vuong
-  	public void tripleRecL(Point dinh, int chRong, int chCao, int type) {
+  	public void tamGiacVuong(Point dinh, int chRong, int chCao, int type) {
   		Point left, right;
-  		
+  		Transformations tf = new Transformations();
   		left = new Point();
   		right = new Point();
+  		
+  		left.x = dinh.x;
+  		left.y = dinh.y + chCao;
+  		
+  		right.x = dinh.x + chRong;
+  		right.y = dinh.y + chCao;
   		
   		if(type == 0) {
   			left.x = dinh.x;
@@ -422,11 +429,11 @@ public class Entities extends CreateGrP{
   	  		right.y = dinh.y - chCao;
   		}
   		else if(type == 2) {
-  			left.x = dinh.x - chRong;
-  			left.y = dinh.y + chCao;
-  			
+  			left = tf.doiXung(left, right);
   			right.x = dinh.x;
   			right.y = dinh.y + chCao;
+  			
+  			
   		}
   		
   		dtDDA(dinh.x, dinh.y, left.x, left.y);
@@ -435,7 +442,7 @@ public class Entities extends CreateGrP{
   	}
   	
  // hinh tam giac nam
-  	public void tripleRecNam(Point dinh, int chRong, int chCao) {
+  	public void tamGiacNam(Point dinh, int chRong, int chCao) {
   		Point up, down;
   		
   		up = new Point();
@@ -545,29 +552,38 @@ public class Entities extends CreateGrP{
  		
  		Point dinhtam = new Point();
  		dinhtam.x = dinh.x;
- 		dinhtam.y = dinh.y;
- 		dtDDA(A.x, A.y, B.x, B.y);
  		dinhtam.y = dinh.y - chCao;
+ 		dtDDA(A.x, A.y, B.x, B.y);
+ 		// hien toa do ra man hinh
+ 		FrameToaDoMayBay.lblA.setText("A (X: " + (float)(A.x * 0.2 - 28) + ", Y: " + (float)(14 - A.y * 0.2) + ")");
+ 		FrameToaDoMayBay.lblB.setText("B (X: " + (float)(B.x * 0.2 - 28) + ", Y: " + (float)(14 - B.y * 0.2) + ")");
  		
- 		tripleRecL(dinhtam, chRong, chCao, 0);
+ 		
+ 		tamGiacVuong(dinhtam, chRong, chCao, 0);
  		dinhtam.x = dinh.x - kc2Canh;
  		dinhtam.y = dinh.y - chCao / 2;
- 		tripleRecL(dinhtam, chRong / 2, chCao / 2, 0);
+ 		tamGiacVuong(dinhtam, chRong / 2, chCao / 2, 0);
  		
  		// ve canh duoi
  		Point _A = new Point();
  		_A.x = A.x;
  		_A.y = A.y + crMB;
+ 		
  		Point _B = new Point();
  		_B.x = B.x;
  		_B.y = B.y + crMB;
+ 		
  		dinhtam.y = dinh.y + crMB*3 - 1;
  		dinhtam.x = dinh.x;
  		dtDDA(_A.x, _A.y, _B.x, _B.y);
- 		tripleRecL(dinhtam, chRong, chCao, 1);
+ 		// hien toa do ra man hinh
+ 		FrameToaDoMayBay.lblC.setText("C (X: " + (float)(_A.x * 0.2 - 28) + ", Y: " + (float)(14 - _A.y * 0.2) + ")");
+ 		FrameToaDoMayBay.lblD.setText("D (X: " + (float)(_B.x * 0.2 - 28) + ", Y: " + (float)(14 - _B.y * 0.2) + ")");
+ 		
+ 		tamGiacVuong(dinhtam, chRong, chCao, 1);
  		dinhtam.x = dinh.x - kc2Canh;
  		dinhtam.y = dinhtam.y - chCao / 2 - 1;
- 		tripleRecL(dinhtam, chRong / 2, chCao / 2, 1);
+ 		tamGiacVuong(dinhtam, chRong / 2, chCao / 2, 1);
  		
  		// ve mui may bay
  		dinhtam.y = _B.y;
@@ -575,6 +591,10 @@ public class Entities extends CreateGrP{
  		dtDDA(_B.x, _B.y, _B.x, _B.y - crMB);
  		dtDDA(_B.x, _B.y, dinhtam.x, dinhtam.y - crMB / 2);
  		dtDDA(_B.x, _B.y - crMB, dinhtam.x, dinhtam.y - crMB / 2);
+ 		// hien toa do ra man hinh
+ 		FrameToaDoMayBay.lblA_1.setText("A (X: " + (float)(dinhtam.x * 0.2 - 28) + ", Y: " + (float)(14 - (dinhtam.y - crMB / 2) * 0.2) + ")");
+ 		FrameToaDoMayBay.lblB_1.setText("B (X: " + (float)(_B.x * 0.2 - 28) + ", Y: " + (float)(14 - (_B.y - crMB) * 0.2) + ")");
+ 		FrameToaDoMayBay.lblC_1.setText("C (X: " + (float)(_B.x * 0.2 - 28) + ", Y: " + (float)(14 - _B.y * 0.2) + ")");
  		
  		// ve duoi may bay
  		dinhtam.y = _A.y;
@@ -583,7 +603,10 @@ public class Entities extends CreateGrP{
  		dtDDA(_A.x, _A.y, _A.x, _A.y - crMB);
  		dtDDA(_A.x, _A.y, dinhtam.x, dinhtam.y - crMB / 2);
  		dtDDA(_A.x, _A.y - crMB, dinhtam.x, dinhtam.y - crMB / 2);
- 		
+ 		// hien toa do ra man hinh
+ 		FrameToaDoMayBay.lblA_2.setText("A (X: " + (float)(dinhtam.x * 0.2 - 28) + ", Y: " + (float)(14 - (dinhtam.y - crMB / 2) * 0.2) + ")");
+ 		FrameToaDoMayBay.lblB_2.setText("B (X: " + (float)(_A.x * 0.2 - 28) + ", Y: " + (float)(14 - (_A.y) * 0.2) + ")");
+ 		FrameToaDoMayBay.lblC_2.setText("C (X: " + (float)(_A.x * 0.2 - 28) + ", Y: " + (float)(14 - (_A.y - crMB) * 0.2) + ")");
  		// to mau
  		super.toMauBien(A.x + 2, A.y + 2, Color.WHITE);
  		super.toMauBien(_B.x + 2, dinhtam.y - crMB / 2, Color.WHITE);
@@ -639,6 +662,7 @@ public class Entities extends CreateGrP{
  	// ve vien dan
  	public void dan(Point tam, int r) {
  		midPointDTron(tam.x, tam.y, r);
+ 		FrameToaDoMayBay.lblA_3.setText("O (X: " + (float)(tam.x * 0.2 - 28) + ", Y: " + (float)(14 - tam.y * 0.2) + ")");
  		super.toMauBien(tam.x, tam.y, Color.GREEN);
  	}
  	// ve may
@@ -690,23 +714,42 @@ public class Entities extends CreateGrP{
  			  _Right = new Point(Right.x - 3, Right.y + chCao_2);
  		
  		dtDDA(Left.x, Left.y, Right.x, Right.y);
+ 		// hien toa do ra man hinh
+ 		FrameToaDoThuyen.lblA.setText("A (X: " + (float)(Left.x * 0.2 - 28) + ", Y: " + (float)(14 - Left.y * 0.2) + ")");
+ 		FrameToaDoThuyen.lblB.setText("B (X: " + (float)(Right.x * 0.2 - 28) + ", Y: " + (float)(14 - Right.y * 0.2) + ")");
+ 		//--------------
  		dtDDA(_Left.x, _Left.y, _Right.x, _Right.y);
+ 		// hien toa do ra man hinh
+ 		FrameToaDoThuyen.lblC.setText("C (X: " + (float)(_Left.x * 0.2 - 28) + ", Y: " + (float)(14 - _Left.y * 0.2) + ")");
+ 		FrameToaDoThuyen.lblD.setText("D (X: " + (float)(_Right.x * 0.2 - 28) + ", Y: " + (float)(14 - _Right.y * 0.2) + ")");
+ 		//----------------------------
  		dtDDA(Left.x, Left.y, _Left.x, _Left.y);
  		dtDDA(Right.x, Right.y, _Right.x, _Right.y);
  		 
+ 		
  		// ve hcn duoi
  		Point ULeft = new Point(tamTh.x - chRong_1, tamTh.y - chCao_1),
  	 		  DRight = new Point(tamTh.x + chRong_1, tamTh.y);
  		hcnDDA(ULeft.x, ULeft.y, DRight.x, DRight.y);
+ 		// hien toa do ra man hinh
+ 	 		FrameToaDoThuyen.lblA_1.setText("A (X: " + (float)(ULeft.x * 0.2 - 28) + ", Y: " + (float)(14 - ULeft.y * 0.2) + ")");
+ 	 		FrameToaDoThuyen.lblB_1.setText("B (X: " + (float)(DRight.x * 0.2 - 28) + ", Y: " + (float)(14 - ULeft.y * 0.2) + ")");
+ 	 		FrameToaDoThuyen.lblC_1.setText("C (X: " + (float)(ULeft.x * 0.2 - 28) + ", Y: " + (float)(14 - DRight.y * 0.2) + ")");
+ 	 		FrameToaDoThuyen.lblD_1.setText("D (X: " + (float)(DRight.x * 0.2 - 28) + ", Y: " + (float)(14 - DRight.y * 0.2) + ")");
  	 	// ve canh buom
  		Point _tam = new Point(tamTh.x, tamTh.y - chCao_2*4);
  		
  		// ve cot buom
  		dtDDA(tamTh.x, tamTh.y - chCao_1, _tam.x, _tam.y);
- 		
+ 		chCao_2 = chCao_2*3 - 3;
  		//ve canh buom 2 ben
- 		tripleRecL(_tam, chRong_2, chCao_2*3 - 3, 0);
- 		tripleRecL(_tam, chRong_3, chCao_2*3 - 3, 2);
+ 		tamGiacVuong(_tam, chRong_2, chCao_2, 0);
+ 		
+ 		tamGiacVuong(_tam, chRong_2, chCao_2, 2);
+ 		// hien toa do ra man hinh
+	 		FrameToaDoThuyen.lblA_2.setText("A (X: " + (float)(_tam.x * 0.2 - 28) + ", Y: " + (float)(14 - _tam.y * 0.2) + ")");
+	 		FrameToaDoThuyen.lblB_2.setText("B (X: " + (float)(_tam.x * 0.2 - 28) + ", Y: " + (float)(14 - (_tam.y + chCao_2) * 0.2) + ")");
+	 		FrameToaDoThuyen.lblC_2.setText("C (X: " + (float)((_tam.x + chRong_2) * 0.2 - 28) + ", Y: " + (float)(14 - (_tam.y + chCao_2) * 0.2) + ")");
  		// to mau day thuyen
  		super.toMauBien(tamTh.x, tamTh.y + 5, Color.ORANGE);
  		
@@ -714,6 +757,10 @@ public class Entities extends CreateGrP{
  		midPointDTron(tamTh.x, tamTh.y + 5, 3);
  		midPointDTron(tamTh.x - 15, tamTh.y + 5, 3);
  		midPointDTron(tamTh.x + 15, tamTh.y + 5, 3);
+ 		// hien toa do ra man hinh
+ 		FrameToaDoThuyen.lblA_3.setText("HT1 (X: " + (float)((tamTh.x - 15) * 0.2 - 28) + ", Y: " + (float)(14 - (tamTh.y + 5) * 0.2) + ")");
+ 		FrameToaDoThuyen.lblB_3.setText("HT2 (X: " + (float)(tamTh.x * 0.2 - 28) + ", Y: " + (float)(14 - (tamTh.y + 5) * 0.2) + ")");
+ 		FrameToaDoThuyen.lblC_3.setText("HT3 (X: " + (float)((tamTh.x + 15) * 0.2 - 28) + ", Y: " + (float)(14 - (tamTh.y + 5) * 0.2) + ")");
  		super.toMauBien(tamTh.x, tamTh.y + 5, Color.RED);
  		super.toMauBien(tamTh.x - 15, tamTh.y + 5, Color.RED);
  		super.toMauBien(tamTh.x + 15, tamTh.y + 5, Color.RED);
